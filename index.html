@@ -14,8 +14,8 @@
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'DM Sans',sans-serif;background:var(--dark);color:var(--white);overflow-x:hidden;}
-  .page{display:none;min-height:100vh;}
-  .page.active{display:block;}
+  .page{display:none;min-height:100vh;pointer-events:none;}
+  .page.active{display:block;pointer-events:auto;}
 
   nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 60px;background:rgba(13,17,23,0.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,150,58,0.18);}
   .nav-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;color:var(--gold);cursor:pointer;}
@@ -27,8 +27,8 @@
   .nav-cta:hover{background:var(--gold-light)!important;}
 
   .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px;overflow:hidden;}
-  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,150,58,0.14) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(46,204,143,0.07) 0%,transparent 60%),linear-gradient(180deg,var(--dark) 0%,var(--dark-2) 100%);}
-  .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,150,58,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(201,150,58,0.05) 1px,transparent 1px);background-size:60px 60px;}
+  .hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,150,58,0.14) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(46,204,143,0.07) 0%,transparent 60%),linear-gradient(180deg,var(--dark) 0%,var(--dark-2) 100%);}
+  .hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(201,150,58,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(201,150,58,0.05) 1px,transparent 1px);background-size:60px 60px;}
   .badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:100px;background:rgba(201,150,58,0.12);border:1px solid rgba(201,150,58,0.3);font-size:12px;font-weight:600;letter-spacing:1.5px;color:var(--gold);text-transform:uppercase;margin-bottom:24px;animation:fadeUp .6s ease both;}
   .badge::before{content:'●';font-size:8px;animation:pulse 2s infinite;}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
@@ -55,7 +55,7 @@
 
   .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
   .service-card{background:var(--dark-2);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:36px;cursor:pointer;transition:transform .3s,box-shadow .3s,border-color .3s;position:relative;overflow:hidden;}
-  .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0;}
+  .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;pointer-events:none;border-radius:16px 16px 0 0;}
   .service-card.gold::before{background:linear-gradient(90deg,var(--gold),var(--gold-light));}
   .service-card.green::before{background:linear-gradient(90deg,var(--green),#1aab73);}
   .service-card.blue::before{background:linear-gradient(90deg,var(--blue),#6ab0f5);}
@@ -98,7 +98,7 @@
 
   .service-hero{padding:140px 60px 80px;max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
   .service-hero-img{border-radius:20px;background:var(--dark-2);border:1px solid rgba(255,255,255,0.08);height:380px;display:flex;align-items:center;justify-content:center;font-size:80px;position:relative;}
-  .service-hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,150,58,0.12) 0%,transparent 60%);border-radius:20px;}
+  .service-hero-img::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(201,150,58,0.12) 0%,transparent 60%);border-radius:20px;}
 
   .process-steps{padding:0 60px 80px;max-width:1200px;margin:0 auto;}
   .process-step{display:flex;gap:24px;align-items:flex-start;padding:28px;border-radius:12px;background:var(--dark-2);border:1px solid rgba(255,255,255,0.06);margin-bottom:16px;transition:border-color .2s,transform .2s;}
@@ -123,19 +123,49 @@
 
   @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
+  /* ── RESPONSIVE ── */
   @media(max-width:900px){
-    nav{padding:16px 24px;}.nav-links{display:none;}
-    .section,.how-section{padding:60px 24px;}
+    nav{padding:14px 20px;}
+    .nav-links{display:none;}
+    .hamburger{display:flex;}
+    .hero{padding:90px 20px 60px;}
+    .hero p{font-size:16px;}
+    .hero-btns{flex-direction:column;align-items:center;gap:12px;}
+    .btn-primary,.btn-outline{width:100%;max-width:340px;justify-content:center;padding:14px 20px;}
+    .stats-bar{padding:28px 20px;flex-wrap:wrap;}
+    .stat-item{min-width:50%;padding:16px 8px;border-right:none;border-bottom:1px solid rgba(255,255,255,0.07);}
+    .stat-item:nth-child(odd){border-right:1px solid rgba(255,255,255,0.07);}
+    .stat-item:nth-last-child(-n+2){border-bottom:none;}
+    .stat-num{font-size:24px;}
+    .section{padding:48px 20px;}
+    .how-section{padding:48px 20px;}
     .services-grid{grid-template-columns:1fr;}
-    .steps-grid{grid-template-columns:1fr 1fr;}
+    .steps-grid{grid-template-columns:1fr;}
     .testimonials-grid{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:1fr 1fr;}
-    .service-hero{grid-template-columns:1fr;padding:120px 24px 60px;}
+    .footer-grid{grid-template-columns:1fr;gap:28px;}
+    .eligibility-grid{grid-template-columns:1fr;padding:0 20px 40px;}
+    .service-hero{grid-template-columns:1fr;padding:90px 20px 48px;gap:24px;}
     .service-hero-img{display:none;}
-    .eligibility-grid{grid-template-columns:1fr;padding:0 24px 60px;}
-    .process-steps{padding:0 24px 60px;}
-    .cta-banner{margin:0 24px 60px;padding:40px 24px;}
-    .stats-bar{padding:40px 24px;}
+    .process-steps{padding:0 20px 48px;}
+    .inner-section{padding:0 20px 40px;}
+    .how-inner{margin-bottom:24px;}
+    .cta-wrap{padding:0 20px 48px;}
+    .contact-wrap{padding:90px 20px 40px;}
+    .page-footer{padding:20px;}
+    .contact-form{padding:24px 16px;}
+    .cta-banner{margin:0 0 40px;padding:32px 20px;}
+    .cta-banner h2{font-size:clamp(22px,5vw,32px);}
+    footer{padding:36px 20px 20px;}
+  }
+  @media(max-width:480px){
+    .stat-item{min-width:100%;border-right:none!important;}
+    .stat-item:nth-last-child(-n+2){border-bottom:1px solid rgba(255,255,255,0.07);}
+    .stat-item:last-child{border-bottom:none;}
+    .service-card{padding:24px 16px;}
+    .step{padding:20px 16px;}
+    .btn-primary,.btn-outline{max-width:100%;font-size:14px;}
+    .hero h1{font-size:clamp(30px,9vw,48px);}
+    .process-step{flex-direction:column;}
   }
 </style>
 </head>
@@ -151,7 +181,20 @@
     <a onclick="showPage('cert')" id="nav-cert">Certifications</a>
     <a onclick="showPage('contact')" class="nav-cta" id="nav-contact">Get Started</a>
   </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="navTo('home')">Home</a>
+  <a onclick="navTo('grants')">Grants</a>
+  <a onclick="navTo('cac')">CAC Registration</a>
+  <a onclick="navTo('scuml')">SCUML</a>
+  <a onclick="navTo('cert')">Certifications</a>
+  <a class="nav-cta" onclick="navTo('contact')">Get Started</a>
+</div>
 
 <!-- HOME -->
 <div id="page-home" class="page active">
@@ -209,7 +252,7 @@
   </div>
 
   <div class="how-section">
-    <div style="max-width:1200px;margin:0 auto 48px;">
+    <div class="how-inner">
       <div class="section-tag">Process</div>
       <h2 class="section-title">Simple. Fast. Reliable.</h2>
       <p class="section-sub">Our streamlined process gets you from application to approval faster than you thought possible.</p>
@@ -254,7 +297,7 @@
     </div>
   </div>
 
-  <div style="padding:0 60px 80px;">
+  <div class="cta-wrap">
     <div class="cta-banner">
       <h2>Ready to Unlock Your<br>Business Potential?</h2>
       <p>Join over 12,000 Nigerians who've already transformed their businesses with GrantPro.</p>
@@ -285,7 +328,7 @@
       <div class="footer-col">
         <h5>Contact</h5>
         <a>&#128222; +234 800 GRANTPRO</a>
-        <a>&#9993;&#65039; hello@grantpro.ng</a>
+        <a>&#9993;&#65039; <span class="__cf_email__" data-cfemail="4b232e2727240b2c392a253f3b392465252c">[email&#160;protected]</span></a>
         <a>&#128205; Victoria Island, Lagos</a>
         <a>&#9200;&#65039; Mon&#8211;Fri, 8am&#8211;6pm</a>
       </div>
@@ -308,7 +351,7 @@
       <div class="service-hero-img">&#127942;</div>
     </div>
   </div>
-  <div style="max-width:1200px;margin:0 auto;padding:0 60px 60px;">
+  <div class="inner-section">
     <div class="section-tag">Grant Types</div>
     <h2 class="section-title" style="margin-bottom:40px;">Which Grant Is Right for You?</h2>
     <div class="services-grid">
@@ -328,7 +371,7 @@
     <div class="process-step"><div class="step-icon">&#128228;</div><div class="step-content"><h4>Submission &amp; Follow-Up</h4><p>We submit applications through correct channels and actively follow up with agencies, attending interviews on your behalf.</p></div></div>
     <div class="process-step"><div class="step-icon">&#127881;</div><div class="step-content"><h4>Grant Disbursement Support</h4><p>After approval, we guide you through fund receipt, compliance reporting, and utilization documentation to maintain grant eligibility.</p></div></div>
   </div>
-  <div style="max-width:1200px;margin:0 auto;padding:0 60px 60px;">
+  <div class="inner-section">
     <div class="section-tag">Eligibility</div>
     <h2 class="section-title" style="margin-bottom:36px;">Who Can Apply?</h2>
     <div class="eligibility-grid" style="padding:0;">
@@ -340,10 +383,10 @@
       <div class="eligibility-item"><div class="check">&#10003;</div><div><h5>Youth Entrepreneurs (18&#8211;35)</h5><p>Young business owners benefit from dedicated youth empowerment grant pools.</p></div></div>
     </div>
   </div>
-  <div style="padding:0 60px 80px;max-width:1200px;margin:0 auto;">
+  <div class="inner-section">
     <div class="cta-banner"><h2>Start Your Grant Application Today</h2><p>Our team reviews your eligibility for free. No upfront payment until we find you a matching grant.</p><button class="btn-primary" onclick="showPage('contact')">&#128640; Apply Now &#8212; It's Free to Start</button></div>
   </div>
-  <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:28px 60px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
+  <footer class="page-footer"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
 </div>
 
 <!-- CAC -->
@@ -360,7 +403,7 @@
       <div class="service-hero-img">&#127963;&#65039;</div>
     </div>
   </div>
-  <div style="max-width:1200px;margin:0 auto;padding:0 60px 60px;">
+  <div class="inner-section">
     <div class="section-tag">Registration Types</div>
     <h2 class="section-title" style="margin-bottom:40px;">What Type of Business Do You Have?</h2>
     <div class="services-grid">
@@ -380,7 +423,7 @@
     <div class="process-step"><div class="step-icon">&#128179;</div><div class="step-content"><h4>Payment of Government Fees</h4><p>We guide you through the official fee payment structure transparently. No hidden charges.</p></div></div>
     <div class="process-step"><div class="step-icon">&#128220;</div><div class="step-content"><h4>Certificate Collection &amp; Delivery</h4><p>Once approved, we collect your Certificate of Incorporation and deliver all documents to you physically or digitally.</p></div></div>
   </div>
-  <div style="max-width:1200px;margin:0 auto;padding:0 60px 80px;">
+  <div class="inner-section">
     <div class="section-tag">What You Need</div>
     <h2 class="section-title" style="margin-bottom:36px;">Required Documents</h2>
     <div class="eligibility-grid" style="padding:0;">
@@ -396,7 +439,7 @@
       <button class="btn-primary" style="background:var(--green);box-shadow:0 8px 32px rgba(46,204,143,0.3);" onclick="showPage('contact')">&#127963;&#65039; Start Registration Now</button>
     </div>
   </div>
-  <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:28px 60px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
+  <footer class="page-footer"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
 </div>
 
 <!-- SCUML -->
@@ -413,7 +456,7 @@
       <div class="service-hero-img">&#128737;&#65039;</div>
     </div>
   </div>
-  <div style="max-width:1200px;margin:0 auto;padding:0 60px 60px;">
+  <div class="inner-section">
     <div class="section-tag">Who Must Register</div>
     <h2 class="section-title" style="margin-bottom:40px;">Is Your Business Required to Register?</h2>
     <div class="services-grid">
@@ -433,7 +476,7 @@
     <div class="process-step"><div class="step-icon">&#127974;</div><div class="step-content"><h4>Fee Payment &amp; Verification</h4><p>We guide you through the official payment process and coordinate with SCUML for document verification and inspection if required.</p></div></div>
     <div class="process-step"><div class="step-icon">&#127915;</div><div class="step-content"><h4>Certificate Issuance</h4><p>Receive your SCUML Certificate of Registration. We also help you set up ongoing compliance monitoring.</p></div></div>
   </div>
-  <div style="max-width:1200px;margin:0 auto;padding:0 60px 80px;">
+  <div class="inner-section">
     <div class="section-tag">Why It Matters</div>
     <h2 class="section-title" style="margin-bottom:36px;">Consequences of Non-Compliance</h2>
     <div class="eligibility-grid" style="padding:0;">
@@ -447,7 +490,7 @@
       <button class="btn-primary" style="background:var(--blue);box-shadow:0 8px 32px rgba(74,144,217,0.3);" onclick="showPage('contact')">&#128737;&#65039; Get SCUML Registered Now</button>
     </div>
   </div>
-  <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:28px 60px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
+  <footer class="page-footer"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
 </div>
 
 <!-- CERTIFICATIONS -->
@@ -464,7 +507,7 @@
       <div class="service-hero-img">&#127891;</div>
     </div>
   </div>
-  <div style="max-width:1200px;margin:0 auto;padding:0 60px 60px;">
+  <div class="inner-section">
     <div class="section-tag">Available Certifications</div>
     <h2 class="section-title" style="margin-bottom:40px;">Certifications We Can Get You &#8212; At No Cost</h2>
     <div class="services-grid">
@@ -484,7 +527,7 @@
     <div class="process-step"><div class="step-icon">&#128218;</div><div class="step-content"><h4>Exam Preparation Support</h4><p>Once enrolled, we provide curated study resources, practice tests, and study schedules to ensure you pass on your first attempt.</p></div></div>
     <div class="process-step"><div class="step-icon">&#127medal;</div><div class="step-content"><h4>Certification &amp; Career Guidance</h4><p>After certification, we help you add credentials to LinkedIn, apply for funded internships, and leverage your new qualifications.</p></div></div>
   </div>
-  <div style="max-width:1200px;margin:0 auto;padding:0 60px 80px;">
+  <div class="inner-section">
     <div class="section-tag">Eligibility</div>
     <h2 class="section-title" style="margin-bottom:36px;">Who Can Get Free Certifications?</h2>
     <div class="eligibility-grid" style="padding:0;">
@@ -500,12 +543,12 @@
       <button class="btn-primary" style="background:var(--red);box-shadow:0 8px 32px rgba(232,93,93,0.3);" onclick="showPage('contact')">&#127891; Get Certified for Free Now</button>
     </div>
   </div>
-  <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:28px 60px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
+  <footer class="page-footer"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
 </div>
 
 <!-- CONTACT -->
 <div id="page-contact" class="page">
-  <div style="padding:120px 60px 80px;max-width:1200px;margin:0 auto;text-align:center;">
+  <div class="contact-wrap">
     <div class="badge">&#128222; Get Started</div>
     <h1 class="section-title" style="font-size:clamp(32px,5vw,56px);margin-bottom:16px;">Let's Build Your <em style="font-style:normal;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Success Story</em></h1>
     <p style="color:var(--muted);font-size:16px;max-width:500px;margin:0 auto 52px;line-height:1.7;">Fill the form below and our team will reach out within 2 hours during business hours with a personalised action plan.</p>
@@ -549,13 +592,13 @@
         <textarea id="f-message" placeholder="Briefly describe your business and what you're hoping to achieve..."></textarea>
       </div>
       <div id="form-error" style="display:none;text-align:center;font-size:13px;color:var(--red);margin-bottom:14px;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
-      <button id="submit-btn" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;" onclick="submitToGoogleForms()">
+      <button id="submit-btn" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;" onclick="submitForm()">
         &#128640; Submit &#8212; Get Free Consultation
       </button>
       <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:16px;">&#128274; Your information is 100% confidential. We never share your data.</p>
     </div>
   </div>
-  <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:28px 60px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
+  <footer class="page-footer"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
 </div>
 
 <script>
@@ -571,12 +614,13 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  /* ── GOOGLE FORMS SUBMISSION ── */
-  function submitToGoogleForms() {
+  /* ── SHEETMONKEY SUBMISSION ── */
+  var SHEETMONKEY_URL = 'https://api.sheetmonkey.io/form/u7ArqBBAWwN8a7ktKuuJH';
+
+  function submitForm() {
     var btn     = document.getElementById('submit-btn');
     var errBox  = document.getElementById('form-error');
     var wrapper = document.getElementById('contact-form-wrapper');
-
     var name    = document.getElementById('f-name').value.trim();
     var phone   = document.getElementById('f-phone').value.trim();
     var email   = document.getElementById('f-email').value.trim();
@@ -589,53 +633,66 @@
       errBox.style.display = 'block';
       errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-
     errBox.style.display = 'none';
-    if (!name)                          { showError('Please enter your full name.'); return; }
-    if (!phone)                         { showError('Please enter your phone number.'); return; }
-    if (!email || email.indexOf('@') < 0){ showError('Please enter a valid email address.'); return; }
-    if (!state)                         { showError('Please select your state of residence.'); return; }
-    if (!service)                       { showError('Please select a service of interest.'); return; }
+    if (!name)                            { showError('Please enter your full name.'); return; }
+    if (!phone)                           { showError('Please enter your phone number.'); return; }
+    if (!email || email.indexOf('@') < 0) { showError('Please enter a valid email address.'); return; }
+    if (!state)                           { showError('Please select your state of residence.'); return; }
+    if (!service)                         { showError('Please select a service of interest.'); return; }
 
     btn.innerHTML = '&#9203; Submitting...';
     btn.disabled = true;
     btn.style.opacity = '0.7';
 
-    var FORM_ID = '1FAIpQLSc-YHPa3CwPGoqrWQXRz3JGENkV_XMmdffaBESK4ba0y99pdw';
-    var params = new URLSearchParams();
-    params.append('entry.2005620554', name);
-    params.append('entry.1065046570', phone);
-    params.append('entry.1045781291', email);
-    params.append('entry.323759865',  state);
-    params.append('entry.589719973',  service);
-    params.append('entry.1166974658', message);
-    params.append('entry.839337160',  name);
-
-    var url = 'https://docs.google.com/forms/d/e/' + FORM_ID + '/formResponse?' + params.toString();
-
-    fetch(url, { method: 'POST', mode: 'no-cors' })
-      .then(function() {
-        wrapper.innerHTML =
-          '<div style="text-align:center;padding:52px 20px;">' +
-            '<div style="font-size:72px;margin-bottom:20px;">&#9989;</div>' +
-            '<h3 style="font-family:\'Playfair Display\',serif;font-size:30px;margin-bottom:14px;">Submission Received!</h3>' +
-            '<p style="color:var(--muted);font-size:15px;line-height:1.8;max-width:380px;margin:0 auto 32px;">' +
-              'Thank you, <strong style="color:var(--white);">' + name + '</strong>! &#127881;<br>' +
-              'Our team will contact you at <strong style="color:var(--gold);">' + phone + '</strong><br>within ' +
-              '<strong style="color:var(--gold);">2 hours</strong> with your personalised action plan.' +
-            '</p>' +
-            '<button class="btn-outline" onclick="showPage(\'home\')">&#8592; Back to Home</button>' +
-          '</div>';
+    fetch(SHEETMONKEY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        'Full Name': name, 'Phone': phone, 'Email': email,
+        'State': state, 'Service': service, 'Message': message,
+        'Submitted': new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' })
       })
-      .catch(function() {
-        showError('Something went wrong. Please call us directly at +234 800 GRANTPRO.');
-        btn.innerHTML = '&#128640; Submit \u2014 Get Free Consultation';
-        btn.disabled = false;
-        btn.style.opacity = '1';
-      });
+    })
+    .then(function(res) { if (!res.ok) throw new Error(); return res.json(); })
+    .then(function() {
+      wrapper.innerHTML =
+        '<div style="text-align:center;padding:52px 20px;">' +
+        '<div style="font-size:72px;margin-bottom:20px;">&#9989;</div>' +
+        '<h3 style="font-family:\'Playfair Display\',serif;font-size:30px;margin-bottom:14px;">Submission Received!</h3>' +
+        '<p style="color:var(--muted);font-size:15px;line-height:1.8;max-width:380px;margin:0 auto 32px;">' +
+        'Thank you, <strong style="color:var(--white);">' + name + '</strong>! &#127881;<br>' +
+        'Our team will contact you at <strong style="color:var(--gold);">' + phone + '</strong><br>within ' +
+        '<strong style="color:var(--gold);">2 hours</strong> with your personalised action plan.</p>' +
+        '<button class="btn-outline" onclick="showPage(\'home\')">&#8592; Back to Home</button></div>';
+    })
+    .catch(function() {
+      showError('Something went wrong. Please call us directly at +234 800 GRANTPRO.');
+      btn.innerHTML = '&#128640; Submit \u2014 Get Free Consultation';
+      btn.disabled = false; btn.style.opacity = '1';
+    });
   }
 
+  /* ── HAMBURGER MENU ── */
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+  function navTo(page) {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    showPage(page);
+  }
+  document.addEventListener('click', function(e) {
+    var menu = document.getElementById('mobile-menu');
+    var btn  = document.getElementById('hamburger');
+    if (menu && menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+    }
+  });
+
   /* ── STATS COUNTER ── */
+
   function animateCounters() {
     var items = document.querySelectorAll('.stat-num');
     items.forEach(function(el) {
