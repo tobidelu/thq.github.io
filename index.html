@@ -113,6 +113,7 @@
   .eligibility-item h5{font-size:15px;font-weight:600;margin-bottom:4px;}
   .eligibility-item p{font-size:13.5px;color:var(--muted);}
 
+  .two-col-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   .contact-form{max-width:560px;margin:0 auto;padding:40px;border-radius:20px;background:var(--dark-2);border:1px solid rgba(255,255,255,0.08);}
   .form-group{margin-bottom:20px;}
   .form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:8px;color:var(--muted);}
@@ -153,6 +154,7 @@
     .contact-wrap{padding:90px 20px 40px;}
     .page-footer{padding:20px;}
     .contact-form{padding:24px 16px;}
+    .two-col-grid{grid-template-columns:1fr;}
     .cta-banner{margin:0 0 40px;padding:32px 20px;}
     .cta-banner h2{font-size:clamp(22px,5vw,32px);}
     footer{padding:36px 20px 20px;}
@@ -398,7 +400,7 @@
         <div class="badge" style="color:var(--green);border-color:rgba(46,204,143,0.3);background:rgba(46,204,143,0.1);">&#127963;&#65039; CAC Registration</div>
         <h1 class="section-title" style="font-size:clamp(32px,5vw,56px);">Register Your Business <em style="font-style:normal;color:var(--green);">Legally &amp; Fast</em></h1>
         <p style="color:var(--muted);font-size:16px;line-height:1.7;margin:20px 0 32px;">The Corporate Affairs Commission is the gateway to legitimizing your business. We make the process painless &#8212; from name search to certificate delivery &#8212; in as little as 3&#8211;7 business days.</p>
-        <button class="btn-primary" style="background:var(--green);box-shadow:0 8px 32px rgba(46,204,143,0.3);" onclick="showPage('contact')">Register My Business &#8594;</button>
+        <button class="btn-primary" style="background:var(--green);box-shadow:0 8px 32px rgba(46,204,143,0.3);" onclick="showPage('cac-form')">Register My Business &#8594;</button>
       </div>
       <div class="service-hero-img">&#127963;&#65039;</div>
     </div>
@@ -436,10 +438,123 @@
     </div>
     <div class="cta-banner" style="margin-top:60px;background:linear-gradient(135deg,rgba(46,204,143,0.12) 0%,rgba(74,144,217,0.08) 100%);border-color:rgba(46,204,143,0.25);">
       <h2>Get Your Business Legally Registered</h2><p>Starting from &#8358;35,000 all-inclusive. Fast, reliable, and 100% legit.</p>
-      <button class="btn-primary" style="background:var(--green);box-shadow:0 8px 32px rgba(46,204,143,0.3);" onclick="showPage('contact')">&#127963;&#65039; Start Registration Now</button>
+      <button class="btn-primary" style="background:var(--green);box-shadow:0 8px 32px rgba(46,204,143,0.3);" onclick="showPage('cac-form')">&#127963;&#65039; Start Registration Now</button>
     </div>
   </div>
   <footer class="page-footer"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
+</div>
+
+
+<!-- CAC REGISTRATION FORM -->
+<div id="page-cac-form" class="page">
+  <div class="contact-wrap">
+    <div class="badge" style="color:var(--green);border-color:rgba(46,204,143,0.3);background:rgba(46,204,143,0.1);">&#127963;&#65039; CAC Registration</div>
+    <h1 class="section-title" style="font-size:clamp(28px,5vw,48px);margin-bottom:12px;">Register Your Business <em style="font-style:normal;color:var(--green);">with CAC</em></h1>
+    <p style="color:var(--muted);font-size:15px;max-width:520px;margin:0 auto 40px;line-height:1.7;">Fill in the details below and our team will get your business legally registered fast — starting from &#8358;35,000 all-inclusive.</p>
+
+    <div class="contact-form" id="cac-form-wrapper" style="max-width:640px;">
+
+      <!-- Business Type -->
+      <div class="form-group">
+        <label>Business Registration Type *</label>
+        <select id="cac-type">
+          <option value="">Select registration type...</option>
+          <option value="Business Name (Sole Proprietor)">Business Name (Sole Proprietor)</option>
+          <option value="Private Limited Company (Ltd)">Private Limited Company (Ltd)</option>
+          <option value="Public Limited Company (PLC)">Public Limited Company (PLC)</option>
+          <option value="Non-Profit / NGO">Non-Profit / NGO</option>
+          <option value="Partnership">Partnership</option>
+          <option value="Incorporated Trustee">Incorporated Trustee</option>
+        </select>
+      </div>
+
+      <!-- Proposed Business Names -->
+      <div class="form-group">
+        <label>Proposed Business Name (1st Choice) *</label>
+        <input type="text" id="cac-name1" placeholder="e.g. Sunshine Ventures">
+      </div>
+      <div class="form-group">
+        <label>Proposed Business Name (2nd Choice)</label>
+        <input type="text" id="cac-name2" placeholder="Backup name in case 1st is taken">
+      </div>
+
+      <!-- Nature of Business -->
+      <div class="form-group">
+        <label>Nature / Line of Business *</label>
+        <input type="text" id="cac-nature" placeholder="e.g. Fashion design, software development, food supply...">
+      </div>
+
+      <!-- Business Address -->
+      <div class="form-group">
+        <label>Business Address *</label>
+        <input type="text" id="cac-address" placeholder="Full address including state">
+      </div>
+
+      <div style="border-top:1px solid rgba(255,255,255,0.08);margin:24px 0 20px;"></div>
+      <p style="font-size:12px;color:var(--gold);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;">Your Contact Details</p>
+
+      <!-- Director / Owner Details -->
+      <div class="form-group">
+        <label>Full Name (Director / Owner) *</label>
+        <input type="text" id="cac-fullname" placeholder="Enter your full legal name">
+      </div>
+      <div class="two-col-grid">
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="cac-phone" placeholder="+234 800 000 0000">
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="cac-email" placeholder="you@email.com">
+        </div>
+      </div>
+
+      <!-- State -->
+      <div class="form-group">
+        <label>State of Residence *</label>
+        <select id="cac-state">
+          <option value="">Select your state...</option>
+          <option>Lagos</option><option>Abuja (FCT)</option><option>Rivers</option>
+          <option>Kano</option><option>Ogun</option><option>Oyo</option>
+          <option>Anambra</option><option>Delta</option><option>Enugu</option>
+          <option>Kaduna</option><option>Imo</option><option>Borno</option><option>Other</option>
+        </select>
+      </div>
+
+      <!-- Share Capital (shown contextually) -->
+      <div class="form-group">
+        <label>Proposed Share Capital (for Ltd/PLC — optional)</label>
+        <input type="text" id="cac-capital" placeholder="e.g. &#8358;100,000">
+      </div>
+
+      <!-- Number of Directors -->
+      <div class="form-group">
+        <label>Number of Directors / Partners *</label>
+        <select id="cac-directors">
+          <option value="">Select...</option>
+          <option value="1">1 (Sole proprietor)</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5+">5 or more</option>
+        </select>
+      </div>
+
+      <!-- Additional notes -->
+      <div class="form-group">
+        <label>Additional Information / Questions</label>
+        <textarea id="cac-notes" placeholder="Any specific requirements, questions, or details we should know..."></textarea>
+      </div>
+
+      <div id="cac-form-error" style="display:none;text-align:center;font-size:13px;color:var(--red);margin-bottom:14px;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
+
+      <button id="cac-submit-btn" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;background:var(--green);box-shadow:0 8px 32px rgba(46,204,143,0.3);" onclick="submitCACForm()">
+        &#127963;&#65039; Submit CAC Registration Request
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:16px;">&#128274; Your information is 100% confidential. We never share your data.</p>
+    </div>
+  </div>
+  <footer class="page-footer"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('cac')" style="cursor:pointer;color:var(--green);">&#8592; Back to CAC</span></div></footer>
 </div>
 
 <!-- SCUML -->
@@ -451,7 +566,7 @@
         <div class="badge" style="color:var(--blue);border-color:rgba(74,144,217,0.3);background:rgba(74,144,217,0.1);">&#128737;&#65039; SCUML Compliance</div>
         <h1 class="section-title" style="font-size:clamp(32px,5vw,56px);">Stay Compliant with <em style="font-style:normal;color:var(--blue);">SCUML</em> Registration</h1>
         <p style="color:var(--muted);font-size:16px;line-height:1.7;margin:20px 0 32px;">The Special Control Unit Against Money Laundering (SCUML) registration is mandatory for Designated Non-Financial Businesses and Professions (DNFBPs) in Nigeria. Non-compliance attracts heavy fines and business shutdown.</p>
-        <button class="btn-primary" style="background:var(--blue);box-shadow:0 8px 32px rgba(74,144,217,0.3);" onclick="showPage('contact')">Get SCUML Registered &#8594;</button>
+        <button class="btn-primary" style="background:var(--blue);box-shadow:0 8px 32px rgba(74,144,217,0.3);" onclick="showPage('scuml-form')">Get SCUML Registered &#8594;</button>
       </div>
       <div class="service-hero-img">&#128737;&#65039;</div>
     </div>
@@ -487,7 +602,7 @@
     </div>
     <div class="cta-banner" style="margin-top:60px;background:linear-gradient(135deg,rgba(74,144,217,0.12) 0%,rgba(46,204,143,0.08) 100%);border-color:rgba(74,144,217,0.25);">
       <h2>Don't Risk Your Business</h2><p>Get SCUML compliant today. Our experts have registered 1,000+ businesses without a single rejection.</p>
-      <button class="btn-primary" style="background:var(--blue);box-shadow:0 8px 32px rgba(74,144,217,0.3);" onclick="showPage('contact')">&#128737;&#65039; Get SCUML Registered Now</button>
+      <button class="btn-primary" style="background:var(--blue);box-shadow:0 8px 32px rgba(74,144,217,0.3);" onclick="showPage('scuml-form')">&#128737;&#65039; Get SCUML Registered Now</button>
     </div>
   </div>
   <footer class="page-footer"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
@@ -502,7 +617,7 @@
         <div class="badge" style="color:var(--red);border-color:rgba(232,93,93,0.3);background:rgba(232,93,93,0.1);">&#127891; Free Certifications</div>
         <h1 class="section-title" style="font-size:clamp(32px,5vw,56px);">Become Certified <em style="font-style:normal;color:var(--red);">for Free!</em></h1>
         <p style="color:var(--muted);font-size:16px;line-height:1.7;margin:20px 0 32px;">Professional certifications that cost hundreds of thousands of naira are available FREE through government programs, NGO partnerships, and international scholarship schemes &#8212; if you know how to access them. We do.</p>
-        <button class="btn-primary" style="background:var(--red);box-shadow:0 8px 32px rgba(232,93,93,0.3);" onclick="showPage('contact')">Claim Free Certifications &#8594;</button>
+        <button class="btn-primary" style="background:var(--red);box-shadow:0 8px 32px rgba(232,93,93,0.3);" onclick="showPage('cert-form')">Claim Free Certifications &#8594;</button>
       </div>
       <div class="service-hero-img">&#127891;</div>
     </div>
@@ -540,10 +655,324 @@
     </div>
     <div class="cta-banner" style="margin-top:60px;background:linear-gradient(135deg,rgba(232,93,93,0.12) 0%,rgba(201,150,58,0.08) 100%);border-color:rgba(232,93,93,0.25);">
       <h2>Your Free Certification Is Waiting</h2><p>Scholarship windows open and close quickly. Let us help you claim yours before they're gone.</p>
-      <button class="btn-primary" style="background:var(--red);box-shadow:0 8px 32px rgba(232,93,93,0.3);" onclick="showPage('contact')">&#127891; Get Certified for Free Now</button>
+      <button class="btn-primary" style="background:var(--red);box-shadow:0 8px 32px rgba(232,93,93,0.3);" onclick="showPage('cert-form')">&#127891; Get Certified for Free Now</button>
     </div>
   </div>
   <footer class="page-footer"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
+</div>
+
+
+<!-- SCUML REGISTRATION FORM -->
+<div id="page-scuml-form" class="page">
+  <div class="contact-wrap">
+    <div class="badge" style="color:var(--blue);border-color:rgba(74,144,217,0.3);background:rgba(74,144,217,0.1);">&#128737;&#65039; SCUML Registration</div>
+    <h1 class="section-title" style="font-size:clamp(28px,5vw,48px);margin-bottom:12px;">Get <em style="font-style:normal;color:var(--blue);">SCUML Registered</em> Today</h1>
+    <p style="color:var(--muted);font-size:15px;max-width:520px;margin:0 auto 40px;line-height:1.7;">Fill in the details below. Our SCUML compliance specialists will handle your registration end-to-end — no rejection risk.</p>
+
+    <div class="contact-form" id="scuml-form-wrapper" style="max-width:640px;">
+
+      <p style="font-size:12px;color:var(--blue);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;">Business Information</p>
+
+      <div class="form-group">
+        <label>Business / Organisation Name *</label>
+        <input type="text" id="sc-bizname" placeholder="Registered business name">
+      </div>
+
+      <div class="form-group">
+        <label>Business Category (DNFBP Type) *</label>
+        <select id="sc-category">
+          <option value="">Select your business type...</option>
+          <option value="Legal Practitioner / Law Firm">Legal Practitioner / Law Firm</option>
+          <option value="Real Estate Agent / Developer">Real Estate Agent / Developer</option>
+          <option value="Dealer in Precious Metals / Stones / Jewellery">Dealer in Precious Metals / Stones / Jewellery</option>
+          <option value="Accountant / Auditor / Tax Consultant">Accountant / Auditor / Tax Consultant</option>
+          <option value="Car Dealer">Car Dealer</option>
+          <option value="Hotel / Hospitality">Hotel / Hospitality</option>
+          <option value="Supermarket / Retail (high-value)">Supermarket / Retail (high-value)</option>
+          <option value="Casino / Gaming">Casino / Gaming</option>
+          <option value="Non-Profit / NGO / Foundation">Non-Profit / NGO / Foundation</option>
+          <option value="Other DNFBP">Other DNFBP</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>CAC Registration Number *</label>
+        <input type="text" id="sc-cacnum" placeholder="e.g. RC1234567 or BN1234567">
+      </div>
+
+      <div class="form-group">
+        <label>Business Address *</label>
+        <input type="text" id="sc-address" placeholder="Full registered business address">
+      </div>
+
+      <div class="form-group">
+        <label>State *</label>
+        <select id="sc-state">
+          <option value="">Select state...</option>
+          <option>Lagos</option><option>Abuja (FCT)</option><option>Rivers</option>
+          <option>Kano</option><option>Ogun</option><option>Oyo</option>
+          <option>Anambra</option><option>Delta</option><option>Enugu</option>
+          <option>Kaduna</option><option>Imo</option><option>Borno</option><option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Annual Turnover (approximate)</label>
+        <select id="sc-turnover">
+          <option value="">Select range...</option>
+          <option value="Below ₦5M">Below &#8358;5M</option>
+          <option value="₦5M – ₦50M">&#8358;5M &#8211; &#8358;50M</option>
+          <option value="₦50M – ₦200M">&#8358;50M &#8211; &#8358;200M</option>
+          <option value="Above ₦200M">Above &#8358;200M</option>
+          <option value="Prefer not to say">Prefer not to say</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Do you have an existing AML/CFT Policy?</label>
+        <select id="sc-aml">
+          <option value="">Select...</option>
+          <option value="Yes, we have one">Yes, we have one</option>
+          <option value="No, we need one drafted">No, we need one drafted</option>
+          <option value="Not sure">Not sure</option>
+        </select>
+      </div>
+
+      <div style="border-top:1px solid rgba(255,255,255,0.08);margin:24px 0 20px;"></div>
+      <p style="font-size:12px;color:var(--blue);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;">Contact Person (Compliance Officer / Director)</p>
+
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" id="sc-fullname" placeholder="Full legal name">
+      </div>
+
+      <div class="two-col-grid">
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="sc-phone" placeholder="+234 800 000 0000">
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="sc-email" placeholder="you@email.com">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Position / Title *</label>
+        <input type="text" id="sc-position" placeholder="e.g. Managing Director, Compliance Officer">
+      </div>
+
+      <div class="form-group">
+        <label>Additional Information</label>
+        <textarea id="sc-notes" placeholder="Any questions, urgent deadlines, or details we should know..."></textarea>
+      </div>
+
+      <div id="scuml-form-error" style="display:none;text-align:center;font-size:13px;color:var(--red);margin-bottom:14px;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
+
+      <button id="scuml-submit-btn" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;background:var(--blue);box-shadow:0 8px 32px rgba(74,144,217,0.3);" onclick="submitSCUMLForm()">
+        &#128737;&#65039; Submit SCUML Registration Request
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:16px;">&#128274; Your information is 100% confidential. We never share your data.</p>
+    </div>
+  </div>
+  <footer class="page-footer"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('scuml')" style="cursor:pointer;color:var(--blue);">&#8592; Back to SCUML</span></div></footer>
+</div>
+
+
+<!-- FREE CERTIFICATION FORM -->
+<div id="page-cert-form" class="page">
+  <div class="contact-wrap">
+    <div class="badge" style="color:var(--red);border-color:rgba(232,93,93,0.3);background:rgba(232,93,93,0.1);">&#127891; Free Certifications</div>
+    <h1 class="section-title" style="font-size:clamp(28px,5vw,48px);margin-bottom:12px;">Find Your <em style="font-style:normal;color:var(--red);">Free Certificate</em></h1>
+    <p style="color:var(--muted);font-size:15px;max-width:540px;margin:0 auto 40px;line-height:1.7;">Tell us about yourself and we'll match you to the best free professional certifications available — tailored specifically to your background and goals.</p>
+
+    <div class="contact-form" id="cert-form-wrapper" style="max-width:640px;">
+
+      <p style="font-size:12px;color:var(--red);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;">Personal Information</p>
+
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" id="cf-fullname" placeholder="Enter your full name">
+      </div>
+
+      <div class="two-col-grid">
+        <div class="form-group">
+          <label>Date of Birth *</label>
+          <input type="date" id="cf-dob">
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <select id="cf-gender">
+            <option value="">Select...</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="two-col-grid">
+        <div class="form-group">
+          <label>Phone Number *</label>
+          <input type="tel" id="cf-phone" placeholder="+234 800 000 0000">
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" id="cf-email" placeholder="you@email.com">
+        </div>
+      </div>
+
+      <div class="two-col-grid">
+        <div class="form-group">
+          <label>Country *</label>
+          <select id="cf-country">
+            <option value="">Select country...</option>
+            <option value="Nigeria">Nigeria</option>
+            <option value="Ghana">Ghana</option>
+            <option value="Kenya">Kenya</option>
+            <option value="South Africa">South Africa</option>
+            <option value="United Kingdom">United Kingdom</option>
+            <option value="United States">United States</option>
+            <option value="Canada">Canada</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>State / Region *</label>
+          <input type="text" id="cf-state" placeholder="e.g. Lagos, Abuja, Accra">
+        </div>
+      </div>
+
+      <div style="border-top:1px solid rgba(255,255,255,0.08);margin:24px 0 20px;"></div>
+      <p style="font-size:12px;color:var(--red);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;">Educational Background</p>
+
+      <div class="form-group">
+        <label>Highest Educational Qualification *</label>
+        <select id="cf-education">
+          <option value="">Select qualification...</option>
+          <option value="WAEC / NECO / O-Level">WAEC / NECO / O-Level</option>
+          <option value="National Diploma (ND)">National Diploma (ND)</option>
+          <option value="Higher National Diploma (HND)">Higher National Diploma (HND)</option>
+          <option value="Bachelor's Degree (B.Sc / B.A / B.Eng)">Bachelor&#39;s Degree (B.Sc / B.A / B.Eng)</option>
+          <option value="Postgraduate Diploma (PGD)">Postgraduate Diploma (PGD)</option>
+          <option value="Master's Degree (M.Sc / MBA / M.A)">Master&#39;s Degree (M.Sc / MBA / M.A)</option>
+          <option value="PhD / Doctorate">PhD / Doctorate</option>
+          <option value="Professional Qualification (e.g. ICAN, ACCA)">Professional Qualification (e.g. ICAN, ACCA)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Course / Field of Study *</label>
+        <input type="text" id="cf-course" placeholder="e.g. Business Administration, Computer Science, Nursing...">
+      </div>
+
+      <div class="form-group">
+        <label>Institution Attended</label>
+        <input type="text" id="cf-institution" placeholder="e.g. University of Lagos, Yaba College of Technology">
+      </div>
+
+      <div style="border-top:1px solid rgba(255,255,255,0.08);margin:24px 0 20px;"></div>
+      <p style="font-size:12px;color:var(--red);font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;">Career & Certification Preferences</p>
+
+      <div class="form-group">
+        <label>Current Employment Status *</label>
+        <select id="cf-employment">
+          <option value="">Select...</option>
+          <option value="Employed (Full-time)">Employed (Full-time)</option>
+          <option value="Employed (Part-time)">Employed (Part-time)</option>
+          <option value="Self-employed / Entrepreneur">Self-employed / Entrepreneur</option>
+          <option value="Unemployed / Job Seeking">Unemployed / Job Seeking</option>
+          <option value="Student">Student</option>
+          <option value="Freelancer">Freelancer</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Industry / Sector You Work In (or Want to Enter) *</label>
+        <select id="cf-industry">
+          <option value="">Select industry...</option>
+          <option value="Technology & IT">Technology &amp; IT</option>
+          <option value="Finance & Banking">Finance &amp; Banking</option>
+          <option value="Healthcare & Public Health">Healthcare &amp; Public Health</option>
+          <option value="Agriculture & Agribusiness">Agriculture &amp; Agribusiness</option>
+          <option value="Project & Business Management">Project &amp; Business Management</option>
+          <option value="Marketing & Digital Media">Marketing &amp; Digital Media</option>
+          <option value="Education & Training">Education &amp; Training</option>
+          <option value="Oil & Gas / Engineering">Oil &amp; Gas / Engineering</option>
+          <option value="NGO & Social Work">NGO &amp; Social Work</option>
+          <option value="Legal & Compliance">Legal &amp; Compliance</option>
+          <option value="Supply Chain & Logistics">Supply Chain &amp; Logistics</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Type of Professional Certificate You Want *</label>
+        <select id="cf-certtype">
+          <option value="">Select certificate type...</option>
+          <option value="Digital & Tech (Google, AWS, Microsoft, Cisco)">Digital &amp; Tech (Google, AWS, Microsoft, Cisco)</option>
+          <option value="Project Management (PMP, CAPM, PRINCE2)">Project Management (PMP, CAPM, PRINCE2)</option>
+          <option value="Data Science & Analytics">Data Science &amp; Analytics</option>
+          <option value="Cybersecurity">Cybersecurity</option>
+          <option value="Finance & Accounting (CFA, ACCA, ICAN)">Finance &amp; Accounting (CFA, ACCA, ICAN)</option>
+          <option value="Healthcare & Public Health (WHO, CDC)">Healthcare &amp; Public Health (WHO, CDC)</option>
+          <option value="Agribusiness & Food Security (IFAD, FAO)">Agribusiness &amp; Food Security (IFAD, FAO)</option>
+          <option value="Human Resources (SHRM, CIPD)">Human Resources (SHRM, CIPD)</option>
+          <option value="Digital Marketing (Google, HubSpot, Meta)">Digital Marketing (Google, HubSpot, Meta)</option>
+          <option value="Supply Chain & Logistics (CIPS, APICS)">Supply Chain &amp; Logistics (CIPS, APICS)</option>
+          <option value="Not sure — recommend the best for me">Not sure &#8212; recommend the best for me</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Computer / Internet Access *</label>
+        <select id="cf-access">
+          <option value="">Select...</option>
+          <option value="Yes — smartphone and laptop/PC">Yes &#8212; smartphone and laptop/PC</option>
+          <option value="Yes — smartphone only">Yes &#8212; smartphone only</option>
+          <option value="Limited — shared access">Limited &#8212; shared access</option>
+          <option value="No regular access">No regular access</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Available Study Time Per Week</label>
+        <select id="cf-studytime">
+          <option value="">Select...</option>
+          <option value="Less than 3 hours">Less than 3 hours</option>
+          <option value="3–7 hours">3&#8211;7 hours</option>
+          <option value="8–15 hours">8&#8211;15 hours</option>
+          <option value="More than 15 hours">More than 15 hours</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>What is Your Main Goal with This Certificate? *</label>
+        <select id="cf-goal">
+          <option value="">Select...</option>
+          <option value="Get a new job or promotion">Get a new job or promotion</option>
+          <option value="Grow my business">Grow my business</option>
+          <option value="Qualify for grants or funding">Qualify for grants or funding</option>
+          <option value="Upskill for personal development">Upskill for personal development</option>
+          <option value="Meet a professional requirement">Meet a professional requirement</option>
+          <option value="Transition to a new career">Transition to a new career</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Anything Else We Should Know?</label>
+        <textarea id="cf-notes" placeholder="Tell us more about your background, specific goals, or any questions you have about free certifications..."></textarea>
+      </div>
+
+      <div id="cert-form-error" style="display:none;text-align:center;font-size:13px;color:var(--red);margin-bottom:14px;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
+
+      <button id="cert-submit-btn" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;background:var(--red);box-shadow:0 8px 32px rgba(232,93,93,0.3);" onclick="submitCertForm()">
+        &#127891; Find My Free Certificate
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:16px;">&#128274; Your information is 100% confidential. We never share your data.</p>
+    </div>
+  </div>
+  <footer class="page-footer"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('cert')" style="cursor:pointer;color:var(--red);">&#8592; Back to Certifications</span></div></footer>
 </div>
 
 <!-- CONTACT -->
@@ -668,6 +1097,230 @@
     .catch(function() {
       showError('Something went wrong. Please call us directly at +234 800 GRANTPRO.');
       btn.innerHTML = '&#128640; Submit \u2014 Get Free Consultation';
+      btn.disabled = false; btn.style.opacity = '1';
+    });
+  }
+
+
+  /* ── CAC REGISTRATION FORM SUBMISSION ── */
+  function submitCACForm() {
+    var btn    = document.getElementById('cac-submit-btn');
+    var errBox = document.getElementById('cac-form-error');
+    var wrapper = document.getElementById('cac-form-wrapper');
+
+    var type      = document.getElementById('cac-type').value;
+    var name1     = document.getElementById('cac-name1').value.trim();
+    var name2     = document.getElementById('cac-name2').value.trim();
+    var nature    = document.getElementById('cac-nature').value.trim();
+    var address   = document.getElementById('cac-address').value.trim();
+    var fullname  = document.getElementById('cac-fullname').value.trim();
+    var phone     = document.getElementById('cac-phone').value.trim();
+    var email     = document.getElementById('cac-email').value.trim();
+    var state     = document.getElementById('cac-state').value;
+    var capital   = document.getElementById('cac-capital').value.trim();
+    var directors = document.getElementById('cac-directors').value;
+    var notes     = document.getElementById('cac-notes').value.trim();
+
+    function showErr(msg) {
+      errBox.textContent = '\u26A0 ' + msg;
+      errBox.style.display = 'block';
+      errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    errBox.style.display = 'none';
+    if (!type)                             { showErr('Please select a registration type.'); return; }
+    if (!name1)                            { showErr('Please enter your proposed business name.'); return; }
+    if (!nature)                           { showErr('Please describe your nature of business.'); return; }
+    if (!address)                          { showErr('Please enter your business address.'); return; }
+    if (!fullname)                         { showErr('Please enter the director/owner full name.'); return; }
+    if (!phone)                            { showErr('Please enter a phone number.'); return; }
+    if (!email || email.indexOf('@') < 0)  { showErr('Please enter a valid email address.'); return; }
+    if (!state)                            { showErr('Please select your state of residence.'); return; }
+    if (!directors)                        { showErr('Please select number of directors.'); return; }
+
+    btn.innerHTML = '&#9203; Submitting...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    fetch(SHEETMONKEY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        'Full Name':        fullname,
+        'Phone':            phone,
+        'Email':            email,
+        'State':            state,
+        'Service':          'CAC Registration — ' + type,
+        'Message':          'Business Name: ' + name1 + (name2 ? ' / ' + name2 : '') + ' | Nature: ' + nature + ' | Address: ' + address + ' | Directors: ' + directors + (capital ? ' | Share Capital: ' + capital : '') + (notes ? ' | Notes: ' + notes : ''),
+        'Submitted':        new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' })
+      })
+    })
+    .then(function(res) { if (!res.ok) throw new Error(); return res.json(); })
+    .then(function() {
+      wrapper.innerHTML =
+        '<div style="text-align:center;padding:52px 20px;">' +
+        '<div style="font-size:72px;margin-bottom:20px;">&#9989;</div>' +
+        '<h3 style="font-family:\'Playfair Display\',serif;font-size:28px;margin-bottom:14px;color:var(--green);">Registration Request Received!</h3>' +
+        '<p style="color:var(--muted);font-size:15px;line-height:1.8;max-width:400px;margin:0 auto 32px;">' +
+        'Thank you, <strong style="color:var(--white);">' + fullname + '</strong>! &#127881;<br>' +
+        'Our CAC specialists will contact you at <strong style="color:var(--green);">' + phone + '</strong> within <strong style="color:var(--green);">2 hours</strong> to begin your <strong style="color:var(--white);">' + type + '</strong> registration.' +
+        '</p>' +
+        '<button class="btn-outline" onclick="showPage(\'home\')">&#8592; Back to Home</button>' +
+        '</div>';
+    })
+    .catch(function() {
+      showErr('Something went wrong. Please call us directly at +234 800 GRANTPRO.');
+      btn.innerHTML = '&#127963;&#65039; Submit CAC Registration Request';
+      btn.disabled = false; btn.style.opacity = '1';
+    });
+  }
+
+
+  /* ── SCUML REGISTRATION FORM ── */
+  function submitSCUMLForm() {
+    var btn     = document.getElementById('scuml-submit-btn');
+    var errBox  = document.getElementById('scuml-form-error');
+    var wrapper = document.getElementById('scuml-form-wrapper');
+
+    var bizname  = document.getElementById('sc-bizname').value.trim();
+    var category = document.getElementById('sc-category').value;
+    var cacnum   = document.getElementById('sc-cacnum').value.trim();
+    var address  = document.getElementById('sc-address').value.trim();
+    var state    = document.getElementById('sc-state').value;
+    var turnover = document.getElementById('sc-turnover').value;
+    var aml      = document.getElementById('sc-aml').value;
+    var fullname = document.getElementById('sc-fullname').value.trim();
+    var phone    = document.getElementById('sc-phone').value.trim();
+    var email    = document.getElementById('sc-email').value.trim();
+    var position = document.getElementById('sc-position').value.trim();
+    var notes    = document.getElementById('sc-notes').value.trim();
+
+    function showErr(msg) {
+      errBox.textContent = '\u26A0 ' + msg;
+      errBox.style.display = 'block';
+      errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    errBox.style.display = 'none';
+    if (!bizname)                          { showErr('Please enter your business name.'); return; }
+    if (!category)                         { showErr('Please select your business category.'); return; }
+    if (!cacnum)                           { showErr('Please enter your CAC registration number.'); return; }
+    if (!address)                          { showErr('Please enter your business address.'); return; }
+    if (!state)                            { showErr('Please select your state.'); return; }
+    if (!fullname)                         { showErr('Please enter the contact person name.'); return; }
+    if (!phone)                            { showErr('Please enter a phone number.'); return; }
+    if (!email || email.indexOf('@') < 0)  { showErr('Please enter a valid email address.'); return; }
+    if (!position)                         { showErr('Please enter your position/title.'); return; }
+
+    btn.innerHTML = '&#9203; Submitting...';
+    btn.disabled = true; btn.style.opacity = '0.7';
+
+    fetch(SHEETMONKEY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        'Full Name': fullname,
+        'Phone':     phone,
+        'Email':     email,
+        'State':     state,
+        'Service':   'SCUML Registration — ' + category,
+        'Message':   'Business: ' + bizname + ' | CAC No: ' + cacnum + ' | Address: ' + address + ' | Turnover: ' + turnover + ' | AML Policy: ' + aml + ' | Position: ' + position + (notes ? ' | Notes: ' + notes : ''),
+        'Submitted': new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' })
+      })
+    })
+    .then(function(res) { if (!res.ok) throw new Error(); return res.json(); })
+    .then(function() {
+      wrapper.innerHTML =
+        '<div style="text-align:center;padding:52px 20px;">' +
+        '<div style="font-size:72px;margin-bottom:20px;">&#9989;</div>' +
+        '<h3 style="font-family:\'Playfair Display\',serif;font-size:28px;margin-bottom:14px;color:var(--blue);">Request Received!</h3>' +
+        '<p style="color:var(--muted);font-size:15px;line-height:1.8;max-width:400px;margin:0 auto 32px;">' +
+        'Thank you, <strong style="color:var(--white);">' + fullname + '</strong>! &#127881;<br>' +
+        'Our SCUML specialists will contact you at <strong style="color:var(--blue);">' + phone + '</strong> within <strong style="color:var(--blue);">2 hours</strong> to begin your registration.' +
+        '</p>' +
+        '<button class="btn-outline" onclick="showPage(\'home\')">&#8592; Back to Home</button>' +
+        '</div>';
+    })
+    .catch(function() {
+      showErr('Something went wrong. Please call us directly at +234 800 GRANTPRO.');
+      btn.innerHTML = '&#128737;&#65039; Submit SCUML Registration Request';
+      btn.disabled = false; btn.style.opacity = '1';
+    });
+  }
+
+  /* ── FREE CERTIFICATION FORM ── */
+  function submitCertForm() {
+    var btn     = document.getElementById('cert-submit-btn');
+    var errBox  = document.getElementById('cert-form-error');
+    var wrapper = document.getElementById('cert-form-wrapper');
+
+    var fullname    = document.getElementById('cf-fullname').value.trim();
+    var dob         = document.getElementById('cf-dob').value;
+    var gender      = document.getElementById('cf-gender').value;
+    var phone       = document.getElementById('cf-phone').value.trim();
+    var email       = document.getElementById('cf-email').value.trim();
+    var country     = document.getElementById('cf-country').value;
+    var state       = document.getElementById('cf-state').value.trim();
+    var education   = document.getElementById('cf-education').value;
+    var course      = document.getElementById('cf-course').value.trim();
+    var institution = document.getElementById('cf-institution').value.trim();
+    var employment  = document.getElementById('cf-employment').value;
+    var industry    = document.getElementById('cf-industry').value;
+    var certtype    = document.getElementById('cf-certtype').value;
+    var access      = document.getElementById('cf-access').value;
+    var studytime   = document.getElementById('cf-studytime').value;
+    var goal        = document.getElementById('cf-goal').value;
+    var notes       = document.getElementById('cf-notes').value.trim();
+
+    function showErr(msg) {
+      errBox.textContent = '\u26A0 ' + msg;
+      errBox.style.display = 'block';
+      errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    errBox.style.display = 'none';
+    if (!fullname)                         { showErr('Please enter your full name.'); return; }
+    if (!dob)                              { showErr('Please enter your date of birth.'); return; }
+    if (!phone)                            { showErr('Please enter your phone number.'); return; }
+    if (!email || email.indexOf('@') < 0)  { showErr('Please enter a valid email address.'); return; }
+    if (!country)                          { showErr('Please select your country.'); return; }
+    if (!state)                            { showErr('Please enter your state/region.'); return; }
+    if (!education)                        { showErr('Please select your highest qualification.'); return; }
+    if (!course)                           { showErr('Please enter your course/field of study.'); return; }
+    if (!employment)                       { showErr('Please select your employment status.'); return; }
+    if (!industry)                         { showErr('Please select your industry.'); return; }
+    if (!certtype)                         { showErr('Please select the type of certificate you want.'); return; }
+    if (!goal)                             { showErr('Please select your main goal.'); return; }
+
+    btn.innerHTML = '&#9203; Finding your best match...';
+    btn.disabled = true; btn.style.opacity = '0.7';
+
+    fetch(SHEETMONKEY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        'Full Name': fullname,
+        'Phone':     phone,
+        'Email':     email,
+        'State':     country + ' — ' + state,
+        'Service':   'Free Certification — ' + certtype,
+        'Message':   'DOB: ' + dob + ' | Gender: ' + gender + ' | Education: ' + education + ' | Course: ' + course + (institution ? ' (' + institution + ')' : '') + ' | Employment: ' + employment + ' | Industry: ' + industry + ' | Goal: ' + goal + ' | Access: ' + access + ' | Study time/wk: ' + studytime + (notes ? ' | Notes: ' + notes : ''),
+        'Submitted': new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' })
+      })
+    })
+    .then(function(res) { if (!res.ok) throw new Error(); return res.json(); })
+    .then(function() {
+      wrapper.innerHTML =
+        '<div style="text-align:center;padding:52px 20px;">' +
+        '<div style="font-size:72px;margin-bottom:20px;">&#127891;</div>' +
+        '<h3 style="font-family:\'Playfair Display\',serif;font-size:28px;margin-bottom:14px;color:var(--red);">Profile Received!</h3>' +
+        '<p style="color:var(--muted);font-size:15px;line-height:1.8;max-width:420px;margin:0 auto 32px;">' +
+        'Thank you, <strong style="color:var(--white);">' + fullname + '</strong>! &#127881;<br>' +
+        'Our certification experts will analyse your profile and contact you at <strong style="color:var(--red);">' + phone + '</strong> within <strong style="color:var(--red);">24 hours</strong> with your personalised free certificate recommendations.' +
+        '</p>' +
+        '<button class="btn-outline" onclick="showPage(\'home\')">&#8592; Back to Home</button>' +
+        '</div>';
+    })
+    .catch(function() {
+      showErr('Something went wrong. Please call us directly at +234 800 GRANTPRO.');
+      btn.innerHTML = '&#127891; Find My Free Certificate';
       btn.disabled = false; btn.style.opacity = '1';
     });
   }
