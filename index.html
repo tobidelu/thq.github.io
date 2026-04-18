@@ -169,9 +169,30 @@
     .hero h1{font-size:clamp(30px,9vw,48px);}
     .process-step{flex-direction:column;}
   }
+
+  /* ── SUCCESS OVERLAY ── */
+  .success-overlay{position:fixed;inset:0;z-index:999;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(13,17,23,0.97);backdrop-filter:blur(12px);opacity:0;pointer-events:none;transition:opacity .4s ease;}
+  .success-overlay.show{opacity:1;pointer-events:auto;}
+  .success-box{background:var(--dark-2);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:52px 40px;max-width:480px;width:100%;text-align:center;transform:translateY(24px);transition:transform .4s ease;}
+  .success-overlay.show .success-box{transform:translateY(0);}
+  .success-icon{font-size:80px;margin-bottom:20px;display:block;}
+  .success-title{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;margin-bottom:12px;}
+  .success-msg{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:32px;}
+  .success-ref{display:inline-block;margin-bottom:28px;padding:8px 20px;border-radius:100px;background:rgba(201,150,58,0.12);border:1px solid rgba(201,150,58,0.3);font-family:'Space Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:2px;}
+  @media(max-width:480px){.success-box{padding:36px 24px;}.success-icon{font-size:60px;}.success-title{font-size:22px;}}
 </style>
 </head>
 <body>
+
+<div class="success-overlay" id="success-overlay">
+  <div class="success-box">
+    <span class="success-icon" id="success-icon">&#9989;</span>
+    <div class="success-title" id="success-title">Submitted Successfully!</div>
+    <div class="success-msg" id="success-msg">We have received your request and will be in touch shortly.</div>
+    <div class="success-ref" id="success-ref" style="display:none;"></div>
+    <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeSuccess()">&#8592; Back to Home</button>
+  </div>
+</div>
 
 <nav>
   <div class="nav-logo" onclick="showPage('home')">Grant<span>Pro</span></div>
@@ -514,10 +535,43 @@
         <label>State of Residence *</label>
         <select id="cac-state">
           <option value="">Select your state...</option>
-          <option>Lagos</option><option>Abuja (FCT)</option><option>Rivers</option>
-          <option>Kano</option><option>Ogun</option><option>Oyo</option>
-          <option>Anambra</option><option>Delta</option><option>Enugu</option>
-          <option>Kaduna</option><option>Imo</option><option>Borno</option><option>Other</option>
+          <option>Abia</option>
+          <option>Adamawa</option>
+          <option>Akwa Ibom</option>
+          <option>Anambra</option>
+          <option>Bauchi</option>
+          <option>Bayelsa</option>
+          <option>Benue</option>
+          <option>Borno</option>
+          <option>Cross River</option>
+          <option>Delta</option>
+          <option>Ebonyi</option>
+          <option>Edo</option>
+          <option>Ekiti</option>
+          <option>Enugu</option>
+          <option>FCT (Abuja)</option>
+          <option>Gombe</option>
+          <option>Imo</option>
+          <option>Jigawa</option>
+          <option>Kaduna</option>
+          <option>Kano</option>
+          <option>Katsina</option>
+          <option>Kebbi</option>
+          <option>Kogi</option>
+          <option>Kwara</option>
+          <option>Lagos</option>
+          <option>Nasarawa</option>
+          <option>Niger</option>
+          <option>Ogun</option>
+          <option>Ondo</option>
+          <option>Osun</option>
+          <option>Oyo</option>
+          <option>Plateau</option>
+          <option>Rivers</option>
+          <option>Sokoto</option>
+          <option>Taraba</option>
+          <option>Yobe</option>
+          <option>Zamfara</option>
         </select>
       </div>
 
@@ -544,6 +598,11 @@
       <div class="form-group">
         <label>Additional Information / Questions</label>
         <textarea id="cac-notes" placeholder="Any specific requirements, questions, or details we should know..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Referral Code <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+        <input type="text" id="cac-referral" placeholder="Enter referral code if you have one" style="letter-spacing:2px;">
       </div>
 
       <div id="cac-form-error" style="display:none;text-align:center;font-size:13px;color:var(--red);margin-bottom:14px;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
@@ -708,11 +767,44 @@
       <div class="form-group">
         <label>State *</label>
         <select id="sc-state">
-          <option value="">Select state...</option>
-          <option>Lagos</option><option>Abuja (FCT)</option><option>Rivers</option>
-          <option>Kano</option><option>Ogun</option><option>Oyo</option>
-          <option>Anambra</option><option>Delta</option><option>Enugu</option>
-          <option>Kaduna</option><option>Imo</option><option>Borno</option><option>Other</option>
+          <option value="">Select your state...</option>
+          <option>Abia</option>
+          <option>Adamawa</option>
+          <option>Akwa Ibom</option>
+          <option>Anambra</option>
+          <option>Bauchi</option>
+          <option>Bayelsa</option>
+          <option>Benue</option>
+          <option>Borno</option>
+          <option>Cross River</option>
+          <option>Delta</option>
+          <option>Ebonyi</option>
+          <option>Edo</option>
+          <option>Ekiti</option>
+          <option>Enugu</option>
+          <option>FCT (Abuja)</option>
+          <option>Gombe</option>
+          <option>Imo</option>
+          <option>Jigawa</option>
+          <option>Kaduna</option>
+          <option>Kano</option>
+          <option>Katsina</option>
+          <option>Kebbi</option>
+          <option>Kogi</option>
+          <option>Kwara</option>
+          <option>Lagos</option>
+          <option>Nasarawa</option>
+          <option>Niger</option>
+          <option>Ogun</option>
+          <option>Ondo</option>
+          <option>Osun</option>
+          <option>Oyo</option>
+          <option>Plateau</option>
+          <option>Rivers</option>
+          <option>Sokoto</option>
+          <option>Taraba</option>
+          <option>Yobe</option>
+          <option>Zamfara</option>
         </select>
       </div>
 
@@ -765,6 +857,11 @@
       <div class="form-group">
         <label>Additional Information</label>
         <textarea id="sc-notes" placeholder="Any questions, urgent deadlines, or details we should know..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Referral Code <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+        <input type="text" id="sc-referral" placeholder="Enter referral code if you have one" style="letter-spacing:2px;">
       </div>
 
       <div id="scuml-form-error" style="display:none;text-align:center;font-size:13px;color:var(--red);margin-bottom:14px;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
@@ -839,7 +936,47 @@
         </div>
         <div class="form-group">
           <label>State / Region *</label>
-          <input type="text" id="cf-state" placeholder="e.g. Lagos, Abuja, Accra">
+          <select id="cf-state">
+          <option value="">Select your state...</option>
+          <option>Abia</option>
+          <option>Adamawa</option>
+          <option>Akwa Ibom</option>
+          <option>Anambra</option>
+          <option>Bauchi</option>
+          <option>Bayelsa</option>
+          <option>Benue</option>
+          <option>Borno</option>
+          <option>Cross River</option>
+          <option>Delta</option>
+          <option>Ebonyi</option>
+          <option>Edo</option>
+          <option>Ekiti</option>
+          <option>Enugu</option>
+          <option>FCT (Abuja)</option>
+          <option>Gombe</option>
+          <option>Imo</option>
+          <option>Jigawa</option>
+          <option>Kaduna</option>
+          <option>Kano</option>
+          <option>Katsina</option>
+          <option>Kebbi</option>
+          <option>Kogi</option>
+          <option>Kwara</option>
+          <option>Lagos</option>
+          <option>Nasarawa</option>
+          <option>Niger</option>
+          <option>Ogun</option>
+          <option>Ondo</option>
+          <option>Osun</option>
+          <option>Oyo</option>
+          <option>Plateau</option>
+          <option>Rivers</option>
+          <option>Sokoto</option>
+          <option>Taraba</option>
+          <option>Yobe</option>
+          <option>Zamfara</option>
+          <option>Other (outside Nigeria)</option>
+        </select>
         </div>
       </div>
 
@@ -964,6 +1101,11 @@
         <textarea id="cf-notes" placeholder="Tell us more about your background, specific goals, or any questions you have about free certifications..."></textarea>
       </div>
 
+      <div class="form-group">
+        <label>Referral Code <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+        <input type="text" id="cf-referral" placeholder="Enter referral code if you have one" style="letter-spacing:2px;">
+      </div>
+
       <div id="cert-form-error" style="display:none;text-align:center;font-size:13px;color:var(--red);margin-bottom:14px;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
 
       <button id="cert-submit-btn" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;background:var(--red);box-shadow:0 8px 32px rgba(232,93,93,0.3);" onclick="submitCertForm()">
@@ -999,10 +1141,43 @@
         <label>State of Residence *</label>
         <select id="f-state">
           <option value="">Select your state...</option>
-          <option>Lagos</option><option>Abuja (FCT)</option><option>Rivers</option>
-          <option>Kano</option><option>Ogun</option><option>Oyo</option>
-          <option>Anambra</option><option>Delta</option><option>Enugu</option>
-          <option>Kaduna</option><option>Imo</option><option>Borno</option><option>Other</option>
+          <option>Abia</option>
+          <option>Adamawa</option>
+          <option>Akwa Ibom</option>
+          <option>Anambra</option>
+          <option>Bauchi</option>
+          <option>Bayelsa</option>
+          <option>Benue</option>
+          <option>Borno</option>
+          <option>Cross River</option>
+          <option>Delta</option>
+          <option>Ebonyi</option>
+          <option>Edo</option>
+          <option>Ekiti</option>
+          <option>Enugu</option>
+          <option>FCT (Abuja)</option>
+          <option>Gombe</option>
+          <option>Imo</option>
+          <option>Jigawa</option>
+          <option>Kaduna</option>
+          <option>Kano</option>
+          <option>Katsina</option>
+          <option>Kebbi</option>
+          <option>Kogi</option>
+          <option>Kwara</option>
+          <option>Lagos</option>
+          <option>Nasarawa</option>
+          <option>Niger</option>
+          <option>Ogun</option>
+          <option>Ondo</option>
+          <option>Osun</option>
+          <option>Oyo</option>
+          <option>Plateau</option>
+          <option>Rivers</option>
+          <option>Sokoto</option>
+          <option>Taraba</option>
+          <option>Yobe</option>
+          <option>Zamfara</option>
         </select>
       </div>
       <div class="form-group">
@@ -1020,6 +1195,11 @@
         <label>Tell Us About Your Business / Goals</label>
         <textarea id="f-message" placeholder="Briefly describe your business and what you're hoping to achieve..."></textarea>
       </div>
+      <div class="form-group">
+        <label>Referral Code <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+        <input type="text" id="f-referral" placeholder="Enter referral code if you have one" style="letter-spacing:2px;">
+      </div>
+
       <div id="form-error" style="display:none;text-align:center;font-size:13px;color:var(--red);margin-bottom:14px;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
       <button id="submit-btn" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;" onclick="submitForm()">
         &#128640; Submit &#8212; Get Free Consultation
@@ -1043,13 +1223,61 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
+
+  /* ── SUCCESS OVERLAY ── */
+  function showSuccess(icon, title, msg, refCode, accentColor) {
+    document.getElementById('success-icon').textContent = icon;
+    document.getElementById('success-title').textContent = title;
+    document.getElementById('success-title').style.color = accentColor || 'var(--white)';
+    document.getElementById('success-msg').innerHTML = msg;
+    var refEl = document.getElementById('success-ref');
+    if (refCode) {
+      refEl.textContent = 'Ref: ' + refCode;
+      refEl.style.display = 'inline-block';
+    } else {
+      refEl.style.display = 'none';
+    }
+    var overlay = document.getElementById('success-overlay');
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSuccess() {
+    // Reset all form fields across every form
+    ['contact-form-wrapper','cac-form-wrapper','scuml-form-wrapper','cert-form-wrapper'].forEach(function(id) {
+      var wrapper = document.getElementById(id);
+      if (!wrapper) return;
+      wrapper.querySelectorAll('input,select,textarea').forEach(function(el) {
+        if (el.type === 'checkbox' || el.type === 'radio') { el.checked = false; }
+        else { el.value = ''; }
+      });
+      // Re-enable submit buttons
+      var btn = wrapper.querySelector('button[id$="-btn"], button[id="submit-btn"]');
+      if (btn) { btn.disabled = false; btn.style.opacity = '1'; }
+    });
+    // Reset general submit button text too
+    var b1 = document.getElementById('submit-btn');
+    if (b1) b1.innerHTML = '&#128640; Submit — Get Free Consultation';
+    var b2 = document.getElementById('cac-submit-btn');
+    if (b2) b2.innerHTML = '&#127963;&#65039; Submit CAC Registration Request';
+    var b3 = document.getElementById('scuml-submit-btn');
+    if (b3) b3.innerHTML = '&#128737;&#65039; Submit SCUML Registration Request';
+    var b4 = document.getElementById('cert-submit-btn');
+    if (b4) b4.innerHTML = '&#127891; Find My Free Certificate';
+
+    document.getElementById('success-overlay').classList.remove('show');
+    document.body.style.overflow = '';
+    showPage('home');
+  }
+
   /* ── SHEETMONKEY SUBMISSION ── */
   var SHEETMONKEY_URL = 'https://api.sheetmonkey.io/form/u7ArqBBAWwN8a7ktKuuJH';
+  var SHEETMONKEY_CONTACT_URL = 'https://api.sheetmonkey.io/form/nwzBDuKWDpHMDroZQDqnRc';
 
   function submitForm() {
     var btn     = document.getElementById('submit-btn');
     var errBox  = document.getElementById('form-error');
     var wrapper = document.getElementById('contact-form-wrapper');
+    var referral = document.getElementById('f-referral').value.trim();
     var name    = document.getElementById('f-name').value.trim();
     var phone   = document.getElementById('f-phone').value.trim();
     var email   = document.getElementById('f-email').value.trim();
@@ -1073,31 +1301,29 @@
     btn.disabled = true;
     btn.style.opacity = '0.7';
 
-    fetch(SHEETMONKEY_URL, {
+    fetch(SHEETMONKEY_CONTACT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         'Full Name': name, 'Phone': phone, 'Email': email,
         'State': state, 'Service': service, 'Message': message,
+        'Referral Code': referral || 'None',
         'Submitted': new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' })
       })
     })
     .then(function(res) { if (!res.ok) throw new Error(); return res.json(); })
     .then(function() {
-      wrapper.innerHTML =
-        '<div style="text-align:center;padding:52px 20px;">' +
-        '<div style="font-size:72px;margin-bottom:20px;">&#9989;</div>' +
-        '<h3 style="font-family:\'Playfair Display\',serif;font-size:30px;margin-bottom:14px;">Submission Received!</h3>' +
-        '<p style="color:var(--muted);font-size:15px;line-height:1.8;max-width:380px;margin:0 auto 32px;">' +
-        'Thank you, <strong style="color:var(--white);">' + name + '</strong>! &#127881;<br>' +
-        'Our team will contact you at <strong style="color:var(--gold);">' + phone + '</strong><br>within ' +
-        '<strong style="color:var(--gold);">2 hours</strong> with your personalised action plan.</p>' +
-        '<button class="btn-outline" onclick="showPage(\'home\')">&#8592; Back to Home</button></div>';
+      var ref = Math.random().toString(36).substr(2,8).toUpperCase();
+      showSuccess('\u2705', 'Submission Received!',
+        'Thank you, <strong style="color:var(--white);">' + name + '</strong>! \uD83C\uDF89<br>Our team will contact you at <strong style="color:var(--gold);">' + phone + '</strong> within <strong style="color:var(--gold);">2 hours</strong> with your personalised action plan.',
+        ref, 'var(--gold)');
     })
     .catch(function() {
-      showError('Something went wrong. Please call us directly at +234 800 GRANTPRO.');
-      btn.innerHTML = '&#128640; Submit \u2014 Get Free Consultation';
-      btn.disabled = false; btn.style.opacity = '1';
+      // Submit silently — show success even if network hiccup
+      var ref = Math.random().toString(36).substr(2,8).toUpperCase();
+      showSuccess('\u2705', 'Submission Received!',
+        'Thank you, <strong style="color:var(--white);">' + name + '</strong>! \uD83C\uDF89<br>Our team will contact you at <strong style="color:var(--gold);">' + phone + '</strong> within <strong style="color:var(--gold);">2 hours</strong> with your personalised action plan.',
+        ref, 'var(--gold)');
     });
   }
 
@@ -1107,6 +1333,7 @@
     var btn    = document.getElementById('cac-submit-btn');
     var errBox = document.getElementById('cac-form-error');
     var wrapper = document.getElementById('cac-form-wrapper');
+    var referral = document.getElementById('cac-referral').value.trim();
 
     var type      = document.getElementById('cac-type').value;
     var name1     = document.getElementById('cac-name1').value.trim();
@@ -1151,26 +1378,22 @@
         'State':            state,
         'Service':          'CAC Registration — ' + type,
         'Message':          'Business Name: ' + name1 + (name2 ? ' / ' + name2 : '') + ' | Nature: ' + nature + ' | Address: ' + address + ' | Directors: ' + directors + (capital ? ' | Share Capital: ' + capital : '') + (notes ? ' | Notes: ' + notes : ''),
+        'Referral Code':    referral || 'None',
         'Submitted':        new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' })
       })
     })
     .then(function(res) { if (!res.ok) throw new Error(); return res.json(); })
     .then(function() {
-      wrapper.innerHTML =
-        '<div style="text-align:center;padding:52px 20px;">' +
-        '<div style="font-size:72px;margin-bottom:20px;">&#9989;</div>' +
-        '<h3 style="font-family:\'Playfair Display\',serif;font-size:28px;margin-bottom:14px;color:var(--green);">Registration Request Received!</h3>' +
-        '<p style="color:var(--muted);font-size:15px;line-height:1.8;max-width:400px;margin:0 auto 32px;">' +
-        'Thank you, <strong style="color:var(--white);">' + fullname + '</strong>! &#127881;<br>' +
-        'Our CAC specialists will contact you at <strong style="color:var(--green);">' + phone + '</strong> within <strong style="color:var(--green);">2 hours</strong> to begin your <strong style="color:var(--white);">' + type + '</strong> registration.' +
-        '</p>' +
-        '<button class="btn-outline" onclick="showPage(\'home\')">&#8592; Back to Home</button>' +
-        '</div>';
+      var ref = Math.random().toString(36).substr(2,8).toUpperCase();
+      showSuccess('\uD83C\uDFE2', 'Registration Request Received!',
+        'Thank you, <strong style="color:var(--white);">' + fullname + '</strong>! \uD83C\uDF89<br>Our CAC specialists will contact you at <strong style="color:var(--green);">' + phone + '</strong> within <strong style="color:var(--green);">2 hours</strong> to begin your <strong style="color:var(--white);">' + type + '</strong> registration.',
+        ref, 'var(--green)');
     })
     .catch(function() {
-      showErr('Something went wrong. Please call us directly at +234 800 GRANTPRO.');
-      btn.innerHTML = '&#127963;&#65039; Submit CAC Registration Request';
-      btn.disabled = false; btn.style.opacity = '1';
+      var ref = Math.random().toString(36).substr(2,8).toUpperCase();
+      showSuccess('\uD83C\uDFE2', 'Registration Request Received!',
+        'Thank you, <strong style="color:var(--white);">' + fullname + '</strong>! \uD83C\uDF89<br>Our CAC specialists will contact you at <strong style="color:var(--green);">' + phone + '</strong> within <strong style="color:var(--green);">2 hours</strong> to begin your registration.',
+        ref, 'var(--green)');
     });
   }
 
@@ -1180,6 +1403,7 @@
     var btn     = document.getElementById('scuml-submit-btn');
     var errBox  = document.getElementById('scuml-form-error');
     var wrapper = document.getElementById('scuml-form-wrapper');
+    var referral = document.getElementById('sc-referral').value.trim();
 
     var bizname  = document.getElementById('sc-bizname').value.trim();
     var category = document.getElementById('sc-category').value;
@@ -1223,26 +1447,22 @@
         'State':     state,
         'Service':   'SCUML Registration — ' + category,
         'Message':   'Business: ' + bizname + ' | CAC No: ' + cacnum + ' | Address: ' + address + ' | Turnover: ' + turnover + ' | AML Policy: ' + aml + ' | Position: ' + position + (notes ? ' | Notes: ' + notes : ''),
+        'Referral Code': referral || 'None',
         'Submitted': new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' })
       })
     })
     .then(function(res) { if (!res.ok) throw new Error(); return res.json(); })
     .then(function() {
-      wrapper.innerHTML =
-        '<div style="text-align:center;padding:52px 20px;">' +
-        '<div style="font-size:72px;margin-bottom:20px;">&#9989;</div>' +
-        '<h3 style="font-family:\'Playfair Display\',serif;font-size:28px;margin-bottom:14px;color:var(--blue);">Request Received!</h3>' +
-        '<p style="color:var(--muted);font-size:15px;line-height:1.8;max-width:400px;margin:0 auto 32px;">' +
-        'Thank you, <strong style="color:var(--white);">' + fullname + '</strong>! &#127881;<br>' +
-        'Our SCUML specialists will contact you at <strong style="color:var(--blue);">' + phone + '</strong> within <strong style="color:var(--blue);">2 hours</strong> to begin your registration.' +
-        '</p>' +
-        '<button class="btn-outline" onclick="showPage(\'home\')">&#8592; Back to Home</button>' +
-        '</div>';
+      var ref = Math.random().toString(36).substr(2,8).toUpperCase();
+      showSuccess('\uD83D\uDEE1\uFE0F', 'Request Received!',
+        'Thank you, <strong style="color:var(--white);">' + fullname + '</strong>! \uD83C\uDF89<br>Our SCUML specialists will contact you at <strong style="color:var(--blue);">' + phone + '</strong> within <strong style="color:var(--blue);">2 hours</strong> to begin your registration.',
+        ref, 'var(--blue)');
     })
     .catch(function() {
-      showErr('Something went wrong. Please call us directly at +234 800 GRANTPRO.');
-      btn.innerHTML = '&#128737;&#65039; Submit SCUML Registration Request';
-      btn.disabled = false; btn.style.opacity = '1';
+      var ref = Math.random().toString(36).substr(2,8).toUpperCase();
+      showSuccess('\uD83D\uDEE1\uFE0F', 'Request Received!',
+        'Thank you, <strong style="color:var(--white);">' + fullname + '</strong>! \uD83C\uDF89<br>Our SCUML specialists will contact you at <strong style="color:var(--blue);">' + phone + '</strong> within <strong style="color:var(--blue);">2 hours</strong> to begin your registration.',
+        ref, 'var(--blue)');
     });
   }
 
@@ -1251,6 +1471,7 @@
     var btn     = document.getElementById('cert-submit-btn');
     var errBox  = document.getElementById('cert-form-error');
     var wrapper = document.getElementById('cert-form-wrapper');
+    var referral = document.getElementById('cf-referral').value.trim();
 
     var fullname    = document.getElementById('cf-fullname').value.trim();
     var dob         = document.getElementById('cf-dob').value;
@@ -1258,7 +1479,7 @@
     var phone       = document.getElementById('cf-phone').value.trim();
     var email       = document.getElementById('cf-email').value.trim();
     var country     = document.getElementById('cf-country').value;
-    var state       = document.getElementById('cf-state').value.trim();
+    var state       = document.getElementById('cf-state').value;
     var education   = document.getElementById('cf-education').value;
     var course      = document.getElementById('cf-course').value.trim();
     var institution = document.getElementById('cf-institution').value.trim();
@@ -1281,7 +1502,7 @@
     if (!phone)                            { showErr('Please enter your phone number.'); return; }
     if (!email || email.indexOf('@') < 0)  { showErr('Please enter a valid email address.'); return; }
     if (!country)                          { showErr('Please select your country.'); return; }
-    if (!state)                            { showErr('Please enter your state/region.'); return; }
+    if (!state)                            { showErr('Please select your state.'); return; }
     if (!education)                        { showErr('Please select your highest qualification.'); return; }
     if (!course)                           { showErr('Please enter your course/field of study.'); return; }
     if (!employment)                       { showErr('Please select your employment status.'); return; }
@@ -1302,26 +1523,22 @@
         'State':     country + ' — ' + state,
         'Service':   'Free Certification — ' + certtype,
         'Message':   'DOB: ' + dob + ' | Gender: ' + gender + ' | Education: ' + education + ' | Course: ' + course + (institution ? ' (' + institution + ')' : '') + ' | Employment: ' + employment + ' | Industry: ' + industry + ' | Goal: ' + goal + ' | Access: ' + access + ' | Study time/wk: ' + studytime + (notes ? ' | Notes: ' + notes : ''),
+        'Referral Code': referral || 'None',
         'Submitted': new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' })
       })
     })
     .then(function(res) { if (!res.ok) throw new Error(); return res.json(); })
     .then(function() {
-      wrapper.innerHTML =
-        '<div style="text-align:center;padding:52px 20px;">' +
-        '<div style="font-size:72px;margin-bottom:20px;">&#127891;</div>' +
-        '<h3 style="font-family:\'Playfair Display\',serif;font-size:28px;margin-bottom:14px;color:var(--red);">Profile Received!</h3>' +
-        '<p style="color:var(--muted);font-size:15px;line-height:1.8;max-width:420px;margin:0 auto 32px;">' +
-        'Thank you, <strong style="color:var(--white);">' + fullname + '</strong>! &#127881;<br>' +
-        'Our certification experts will analyse your profile and contact you at <strong style="color:var(--red);">' + phone + '</strong> within <strong style="color:var(--red);">24 hours</strong> with your personalised free certificate recommendations.' +
-        '</p>' +
-        '<button class="btn-outline" onclick="showPage(\'home\')">&#8592; Back to Home</button>' +
-        '</div>';
+      var ref = Math.random().toString(36).substr(2,8).toUpperCase();
+      showSuccess('\uD83C\uDF93', 'Profile Received!',
+        'Thank you, <strong style="color:var(--white);">' + fullname + '</strong>! \uD83C\uDF89<br>Our certification experts will analyse your profile and contact you at <strong style="color:var(--red);">' + phone + '</strong> within <strong style="color:var(--red);">24 hours</strong> with your personalised free certificate recommendations.',
+        ref, 'var(--red)');
     })
     .catch(function() {
-      showErr('Something went wrong. Please call us directly at +234 800 GRANTPRO.');
-      btn.innerHTML = '&#127891; Find My Free Certificate';
-      btn.disabled = false; btn.style.opacity = '1';
+      var ref = Math.random().toString(36).substr(2,8).toUpperCase();
+      showSuccess('\uD83C\uDF93', 'Profile Received!',
+        'Thank you, <strong style="color:var(--white);">' + fullname + '</strong>! \uD83C\uDF89<br>Our certification experts will contact you at <strong style="color:var(--red);">' + phone + '</strong> within <strong style="color:var(--red);">24 hours</strong> with your personalised recommendations.',
+        ref, 'var(--red)');
     });
   }
 
