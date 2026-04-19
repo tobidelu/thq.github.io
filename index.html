@@ -189,9 +189,33 @@
     .eligibility-grid{grid-template-columns:1fr;padding:0 18px 40px;gap:10px;}
     .eligibility-item{padding:16px;}
   }
+
+  /* ── SUCCESS OVERLAY ── */
+  .success-overlay{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;background:rgba(13,17,23,0.97);backdrop-filter:blur(12px);opacity:0;pointer-events:none;transition:opacity .4s ease;}
+  .success-overlay.show{opacity:1;pointer-events:auto;}
+  .success-box{background:var(--dark-2);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:52px 40px;max-width:480px;width:100%;text-align:center;transform:translateY(24px);transition:transform .4s ease;}
+  .success-overlay.show .success-box{transform:translateY(0);}
+  .s-icon{font-size:76px;margin-bottom:16px;display:block;line-height:1;}
+  .s-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;margin-bottom:12px;}
+  .s-msg{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:24px;}
+  .s-ref{display:inline-block;margin-bottom:24px;padding:7px 18px;border-radius:100px;background:rgba(201,150,58,0.12);border:1px solid rgba(201,150,58,0.3);font-family:'Space Mono',monospace;font-size:12px;color:var(--gold);letter-spacing:2px;}
+  .form-divider{border:none;border-top:1px solid rgba(255,255,255,0.08);margin:24px 0;}
+  .form-section-label{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;display:block;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:600px){.two-col{grid-template-columns:1fr;} .success-box{padding:36px 20px;} .s-icon{font-size:56px;} .s-title{font-size:20px;}}
 </style>
 </head>
 <body>
+
+<div class="success-overlay" id="success-overlay">
+  <div class="success-box">
+    <span class="s-icon" id="s-icon">✅</span>
+    <div class="s-title" id="s-title">Submitted!</div>
+    <div class="s-msg" id="s-msg"></div>
+    <div class="s-ref" id="s-ref"></div>
+    <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeSuccess()">&#8592; Back to Home</button>
+  </div>
+</div>
 
 <nav>
   <div class="nav-logo" onclick="showPage('home')">Grant<span>Pro</span></div>
@@ -386,7 +410,7 @@
         <div class="badge">&#128176; Grant Services</div>
         <h1 class="section-title" style="font-size:clamp(32px,5vw,56px);">Unlock <em style="font-style:normal;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Government &amp; International</em> Grants</h1>
         <p style="color:var(--muted);font-size:16px;line-height:1.7;margin:20px 0 32px;">Billions of naira in grants go unclaimed every year because businesses don't know how to apply. We change that. Our experts have secured over &#8358;8.2B in grants for our clients.</p>
-        <button class="btn-primary" onclick="showPage('contact')">Apply for a Grant Today &#8594;</button>
+        <button class="btn-primary" onclick="showPage('grants-form')">Apply for a Grant Today &#8594;</button>
       </div>
       <div class="service-hero-img">&#127942;</div>
     </div>
@@ -424,7 +448,7 @@
     </div>
   </div>
   <div style="padding:0 60px 80px;max-width:1200px;margin:0 auto;">
-    <div class="cta-banner"><h2>Start Your Grant Application Today</h2><p>Our team reviews your eligibility for free. No upfront payment until we find you a matching grant.</p><button class="btn-primary" onclick="showPage('contact')">&#128640; Apply Now &#8212; It's Free to Start</button></div>
+    <div class="cta-banner"><h2>Start Your Grant Application Today</h2><p>Our team reviews your eligibility for free. No upfront payment until we find you a matching grant.</p><button class="btn-primary" onclick="showPage('grants-form')">&#128640; Apply Now &#8212; It's Free to Start</button></div>
   </div>
   <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:28px 60px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
 </div>
@@ -438,7 +462,7 @@
         <div class="badge" style="color:var(--green);border-color:rgba(46,204,143,0.3);background:rgba(46,204,143,0.1);">&#127963;&#65039; CAC Registration</div>
         <h1 class="section-title" style="font-size:clamp(32px,5vw,56px);">Register Your Business <em style="font-style:normal;color:var(--green);">Legally &amp; Fast</em></h1>
         <p style="color:var(--muted);font-size:16px;line-height:1.7;margin:20px 0 32px;">The Corporate Affairs Commission is the gateway to legitimizing your business. We make the process painless &#8212; from name search to certificate delivery &#8212; in as little as 3&#8211;7 business days.</p>
-        <button class="btn-primary" style="background:var(--green);box-shadow:0 8px 32px rgba(46,204,143,0.3);" onclick="showPage('contact')">Register My Business &#8594;</button>
+        <button class="btn-primary" style="background:var(--green);box-shadow:0 8px 32px rgba(46,204,143,0.3);" onclick="showPage('cac-form')">Register My Business &#8594;</button>
       </div>
       <div class="service-hero-img">&#127963;&#65039;</div>
     </div>
@@ -476,7 +500,7 @@
     </div>
     <div class="cta-banner" style="margin-top:60px;background:linear-gradient(135deg,rgba(46,204,143,0.12) 0%,rgba(74,144,217,0.08) 100%);border-color:rgba(46,204,143,0.25);">
       <h2>Get Your Business Legally Registered</h2><p>Starting from &#8358;35,000 all-inclusive. Fast, reliable, and 100% legit.</p>
-      <button class="btn-primary" style="background:var(--green);box-shadow:0 8px 32px rgba(46,204,143,0.3);" onclick="showPage('contact')">&#127963;&#65039; Start Registration Now</button>
+      <button class="btn-primary" style="background:var(--green);box-shadow:0 8px 32px rgba(46,204,143,0.3);" onclick="showPage('cac-form')">&#127963;&#65039; Start Registration Now</button>
     </div>
   </div>
   <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:28px 60px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
@@ -491,7 +515,7 @@
         <div class="badge" style="color:var(--blue);border-color:rgba(74,144,217,0.3);background:rgba(74,144,217,0.1);">&#128737;&#65039; SCUML Compliance</div>
         <h1 class="section-title" style="font-size:clamp(32px,5vw,56px);">Stay Compliant with <em style="font-style:normal;color:var(--blue);">SCUML</em> Registration</h1>
         <p style="color:var(--muted);font-size:16px;line-height:1.7;margin:20px 0 32px;">The Special Control Unit Against Money Laundering (SCUML) registration is mandatory for Designated Non-Financial Businesses and Professions (DNFBPs) in Nigeria. Non-compliance attracts heavy fines and business shutdown.</p>
-        <button class="btn-primary" style="background:var(--blue);box-shadow:0 8px 32px rgba(74,144,217,0.3);" onclick="showPage('contact')">Get SCUML Registered &#8594;</button>
+        <button class="btn-primary" style="background:var(--blue);box-shadow:0 8px 32px rgba(74,144,217,0.3);" onclick="showPage('scuml-form')">Get SCUML Registered &#8594;</button>
       </div>
       <div class="service-hero-img">&#128737;&#65039;</div>
     </div>
@@ -527,7 +551,7 @@
     </div>
     <div class="cta-banner" style="margin-top:60px;background:linear-gradient(135deg,rgba(74,144,217,0.12) 0%,rgba(46,204,143,0.08) 100%);border-color:rgba(74,144,217,0.25);">
       <h2>Don't Risk Your Business</h2><p>Get SCUML compliant today. Our experts have registered 1,000+ businesses without a single rejection.</p>
-      <button class="btn-primary" style="background:var(--blue);box-shadow:0 8px 32px rgba(74,144,217,0.3);" onclick="showPage('contact')">&#128737;&#65039; Get SCUML Registered Now</button>
+      <button class="btn-primary" style="background:var(--blue);box-shadow:0 8px 32px rgba(74,144,217,0.3);" onclick="showPage('scuml-form')">&#128737;&#65039; Get SCUML Registered Now</button>
     </div>
   </div>
   <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:28px 60px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
@@ -542,7 +566,7 @@
         <div class="badge" style="color:var(--red);border-color:rgba(232,93,93,0.3);background:rgba(232,93,93,0.1);">&#127891; Free Certifications</div>
         <h1 class="section-title" style="font-size:clamp(32px,5vw,56px);">Become Certified <em style="font-style:normal;color:var(--red);">for Free!</em></h1>
         <p style="color:var(--muted);font-size:16px;line-height:1.7;margin:20px 0 32px;">Professional certifications that cost hundreds of thousands of naira are available FREE through government programs, NGO partnerships, and international scholarship schemes &#8212; if you know how to access them. We do.</p>
-        <button class="btn-primary" style="background:var(--red);box-shadow:0 8px 32px rgba(232,93,93,0.3);" onclick="showPage('contact')">Claim Free Certifications &#8594;</button>
+        <button class="btn-primary" style="background:var(--red);box-shadow:0 8px 32px rgba(232,93,93,0.3);" onclick="showPage('cert-form')">Claim Free Certifications &#8594;</button>
       </div>
       <div class="service-hero-img">&#127891;</div>
     </div>
@@ -580,12 +604,539 @@
     </div>
     <div class="cta-banner" style="margin-top:60px;background:linear-gradient(135deg,rgba(232,93,93,0.12) 0%,rgba(201,150,58,0.08) 100%);border-color:rgba(232,93,93,0.25);">
       <h2>Your Free Certification Is Waiting</h2><p>Scholarship windows open and close quickly. Let us help you claim yours before they're gone.</p>
-      <button class="btn-primary" style="background:var(--red);box-shadow:0 8px 32px rgba(232,93,93,0.3);" onclick="showPage('contact')">&#127891; Get Certified for Free Now</button>
+      <button class="btn-primary" style="background:var(--red);box-shadow:0 8px 32px rgba(232,93,93,0.3);" onclick="showPage('cert-form')">&#127891; Get Certified for Free Now</button>
     </div>
   </div>
   <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:28px 60px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
 </div>
 
+
+<!-- GRANTS FORM -->
+<div id="page-grants-form" class="page">
+  <div style="padding:110px 24px 48px;max-width:700px;margin:0 auto;text-align:center;">
+    <div class="badge" style="color:var(--gold);border-color:rgba(201,150,58,0.3);background:rgba(201,150,58,0.1);">&#127942; Grant Application</div>
+    <h1 class="section-title" style="font-size:clamp(26px,5vw,44px);margin:16px 0 12px;">Apply for a <em style="font-style:normal;color:var(--gold);">Grant</em></h1>
+    <p style="color:var(--muted);font-size:15px;max-width:500px;margin:0 auto 36px;line-height:1.7;">Tell us about your business and we will identify the best matching grants and handle your application end-to-end — no upfront payment.</p>
+    <div class="contact-form" id="grants-form-wrapper" style="max-width:640px;margin:0 auto;text-align:left;">
+
+      <span class="form-section-label">Your Contact Details</span>
+      <div class="form-group"><label>Full Name *</label><input type="text" id="gf-name" placeholder="Your full legal name"></div>
+      <div class="two-col">
+        <div class="form-group"><label>Phone Number *</label><input type="tel" id="gf-phone" placeholder="+234 800 000 0000"></div>
+        <div class="form-group"><label>Email Address *</label><input type="email" id="gf-email" placeholder="you@email.com"></div>
+      </div>
+      <div class="form-group"><label>State of Residence *</label><select id="gf-state"><option value="">Select state...</option>
+          <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+          <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+          <option>Benue</option><option>Borno</option><option>Cross River</option>
+          <option>Delta</option><option>Ebonyi</option><option>Edo</option>
+          <option>Ekiti</option><option>Enugu</option><option>FCT (Abuja)</option>
+          <option>Gombe</option><option>Imo</option><option>Jigawa</option>
+          <option>Kaduna</option><option>Kano</option><option>Katsina</option>
+          <option>Kebbi</option><option>Kogi</option><option>Kwara</option>
+          <option>Lagos</option><option>Nasarawa</option><option>Niger</option>
+          <option>Ogun</option><option>Ondo</option><option>Osun</option>
+          <option>Oyo</option><option>Plateau</option><option>Rivers</option>
+          <option>Sokoto</option><option>Taraba</option><option>Yobe</option>
+          <option>Zamfara</option></select></div>
+
+      <hr class="form-divider">
+      <span class="form-section-label">Business Information</span>
+      <div class="form-group"><label>Business / Organisation Name *</label><input type="text" id="gf-bizname" placeholder="Registered name of your business or NGO"></div>
+      <div class="two-col">
+        <div class="form-group"><label>Business Type *</label>
+          <select id="gf-biztype">
+            <option value="">Select...</option>
+            <option>Sole Proprietorship</option><option>Private Limited Company (Ltd)</option>
+            <option>NGO / Non-Profit</option><option>Cooperative Society</option>
+            <option>Tech Startup</option><option>Agricultural Enterprise</option><option>Individual Applicant</option>
+          </select>
+        </div>
+        <div class="form-group"><label>CAC Reg. Number</label><input type="text" id="gf-cacnum" placeholder="RC/BN number (if registered)"></div>
+      </div>
+      <div class="form-group"><label>Business Sector / Industry *</label>
+        <select id="gf-sector">
+          <option value="">Select sector...</option>
+          <option>Agriculture &amp; Agribusiness</option><option>Technology &amp; Innovation</option>
+          <option>Manufacturing</option><option>Healthcare</option><option>Education &amp; Training</option>
+          <option>Fashion &amp; Creative Arts</option><option>Trade &amp; Commerce</option>
+          <option>Construction &amp; Real Estate</option><option>Finance &amp; Fintech</option>
+          <option>Energy &amp; Environment</option><option>Tourism &amp; Hospitality</option><option>Other</option>
+        </select>
+      </div>
+      <div class="two-col">
+        <div class="form-group"><label>Number of Employees</label>
+          <select id="gf-employees">
+            <option value="">Select...</option>
+            <option>Just me (solo)</option><option>2–5</option><option>6–20</option>
+            <option>21–50</option><option>51–200</option><option>200+</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Annual Turnover (approx.)</label>
+          <select id="gf-turnover">
+            <option value="">Select...</option>
+            <option>Pre-revenue / Startup</option><option>Below ₦5M</option>
+            <option>₦5M – ₦50M</option><option>₦50M – ₦200M</option><option>Above ₦200M</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Grant Type You Are Interested In *</label>
+        <select id="gf-granttype">
+          <option value="">Select...</option>
+          <option>SMEDAN / BOI (Federal Government)</option><option>State Government Grant</option>
+          <option>International Development Grant (World Bank, USAID, EU)</option>
+          <option>Women / Youth Empowerment Grant</option><option>Agric &amp; Food Security Grant</option>
+          <option>Tech &amp; Innovation Grant</option><option>NGO / Social Impact Grant</option>
+          <option>Not sure — recommend best for me</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Have You Applied for a Grant Before? *</label>
+        <select id="gf-prev">
+          <option value="">Select...</option>
+          <option>No, this is my first time</option><option>Yes, and I was unsuccessful</option>
+          <option>Yes, and I received a grant</option>
+        </select>
+      </div>
+      <div class="form-group"><label>What Will the Grant Be Used For? *</label>
+        <textarea id="gf-purpose" placeholder="Briefly describe your business and how you plan to use the grant funds..."></textarea>
+      </div>
+            <hr class="form-divider">
+      <div class="form-group">
+        <label>Referral Code <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+        <input type="text" id="gf-referral" placeholder="Enter referral code if you have one" style="letter-spacing:2px;">
+      </div>
+      <div id="grants-form-error" style="display:none;font-size:13px;color:var(--red);margin:12px 0;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
+      <button id="grants-submit-btn" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;margin-top:8px;" onclick="submitGrantsForm()">
+        &#127942; Submit Grant Application Request
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:14px;">&#128274; Your information is 100% confidential.</p>
+    </div>
+  </div>
+  <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:20px 40px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('grants')" style="cursor:pointer;color:var(--gold);">&#8592; Back to Grants</span></div></footer>
+</div>
+
+<!-- CAC FORM -->
+<div id="page-cac-form" class="page">
+  <div style="padding:110px 24px 48px;max-width:700px;margin:0 auto;text-align:center;">
+    <div class="badge" style="color:var(--green);border-color:rgba(46,204,143,0.3);background:rgba(46,204,143,0.1);">&#127963;&#65039; CAC Registration</div>
+    <h1 class="section-title" style="font-size:clamp(26px,5vw,44px);margin:16px 0 12px;">Register Your Business <em style="font-style:normal;color:var(--green);">with CAC</em></h1>
+    <p style="color:var(--muted);font-size:15px;max-width:500px;margin:0 auto 36px;line-height:1.7;">Get your business legally registered fast — from name search to Certificate of Incorporation. Starting from &#8358;35,000 all-inclusive.</p>
+    <div class="contact-form" id="cac-form-wrapper" style="max-width:640px;margin:0 auto;text-align:left;">
+
+      <span class="form-section-label">Registration Details</span>
+      <div class="form-group"><label>Registration Type *</label>
+        <select id="cf2-type">
+          <option value="">Select type...</option>
+          <option>Business Name (Sole Proprietor)</option><option>Private Limited Company (Ltd)</option>
+          <option>Public Limited Company (PLC)</option><option>Incorporated Trustee (NGO/Church/Association)</option>
+          <option>Limited Liability Partnership</option>
+        </select>
+      </div>
+      <div class="two-col">
+        <div class="form-group"><label>Proposed Name (1st Choice) *</label><input type="text" id="cf2-name1" placeholder="e.g. Sunshine Ventures"></div>
+        <div class="form-group"><label>Proposed Name (2nd Choice)</label><input type="text" id="cf2-name2" placeholder="Backup in case 1st is taken"></div>
+      </div>
+      <div class="form-group"><label>Nature / Line of Business *</label><input type="text" id="cf2-nature" placeholder="e.g. Fashion design, software development, food supply..."></div>
+      <div class="form-group"><label>Registered Business Address *</label><input type="text" id="cf2-address" placeholder="Full address (residential is accepted)"></div>
+      <div class="two-col">
+        <div class="form-group"><label>State *</label><select id="cf2-state"><option value="">Select state...</option>
+          <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+          <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+          <option>Benue</option><option>Borno</option><option>Cross River</option>
+          <option>Delta</option><option>Ebonyi</option><option>Edo</option>
+          <option>Ekiti</option><option>Enugu</option><option>FCT (Abuja)</option>
+          <option>Gombe</option><option>Imo</option><option>Jigawa</option>
+          <option>Kaduna</option><option>Kano</option><option>Katsina</option>
+          <option>Kebbi</option><option>Kogi</option><option>Kwara</option>
+          <option>Lagos</option><option>Nasarawa</option><option>Niger</option>
+          <option>Ogun</option><option>Ondo</option><option>Osun</option>
+          <option>Oyo</option><option>Plateau</option><option>Rivers</option>
+          <option>Sokoto</option><option>Taraba</option><option>Yobe</option>
+          <option>Zamfara</option></select></div>
+        <div class="form-group"><label>Number of Directors / Partners *</label>
+          <select id="cf2-directors">
+            <option value="">Select...</option>
+            <option>1 (Sole proprietor)</option><option>2</option><option>3</option><option>4</option><option>5+</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Proposed Share Capital <span style="color:var(--muted);font-weight:400;">(for Ltd/PLC)</span></label>
+        <select id="cf2-capital">
+          <option value="Not applicable">Not applicable (Business Name / NGO)</option>
+          <option>₦100,000 (minimum)</option><option>₦500,000</option><option>₦1,000,000</option>
+          <option>₦5,000,000</option><option>₦10,000,000+</option>
+        </select>
+      </div>
+
+      <hr class="form-divider">
+      <span class="form-section-label">Director / Owner Details</span>
+      <div class="form-group"><label>Full Name (Director / Owner) *</label><input type="text" id="cf2-fullname" placeholder="Full legal name as on government ID"></div>
+      <div class="two-col">
+        <div class="form-group"><label>Phone Number *</label><input type="tel" id="cf2-phone" placeholder="+234 800 000 0000"></div>
+        <div class="form-group"><label>Email Address *</label><input type="email" id="cf2-email" placeholder="you@email.com"></div>
+      </div>
+      <div class="form-group"><label>Valid ID Type *</label>
+        <select id="cf2-idtype">
+          <option value="">Select ID type...</option>
+          <option>National ID (NIN)</option><option>International Passport</option>
+          <option>Driver's Licence</option><option>Voter's Card (PVC)</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Additional Information</label>
+        <textarea id="cf2-notes" placeholder="Any specific requirements, timelines, or questions..."></textarea>
+      </div>
+            <hr class="form-divider">
+      <div class="form-group">
+        <label>Referral Code <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+        <input type="text" id="cf2-referral" placeholder="Enter referral code if you have one" style="letter-spacing:2px;">
+      </div>
+      <div id="cac-form-error" style="display:none;font-size:13px;color:var(--red);margin:12px 0;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
+      <button id="cac-submit-btn" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;margin-top:8px;background:var(--green);box-shadow:0 8px 32px rgba(46,204,143,0.3);" onclick="submitCACForm()">
+        &#127963;&#65039; Submit CAC Registration Request
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:14px;">&#128274; Your information is 100% confidential.</p>
+    </div>
+  </div>
+  <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:20px 40px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('cac')" style="cursor:pointer;color:var(--green);">&#8592; Back to CAC Registration</span></div></footer>
+</div>
+
+<!-- SCUML FORM -->
+<div id="page-scuml-form" class="page">
+  <div style="padding:110px 24px 48px;max-width:700px;margin:0 auto;text-align:center;">
+    <div class="badge" style="color:var(--blue);border-color:rgba(74,144,217,0.3);background:rgba(74,144,217,0.1);">&#128737;&#65039; SCUML Registration</div>
+    <h1 class="section-title" style="font-size:clamp(26px,5vw,44px);margin:16px 0 12px;">Get <em style="font-style:normal;color:var(--blue);">SCUML Compliant</em></h1>
+    <p style="color:var(--muted);font-size:15px;max-width:500px;margin:0 auto 36px;line-height:1.7;">Fill in your business details and our compliance specialists will handle your SCUML registration from start to finish — zero rejections.</p>
+    <div class="contact-form" id="scuml-form-wrapper" style="max-width:640px;margin:0 auto;text-align:left;">
+
+      <span class="form-section-label">Business Information</span>
+      <div class="form-group"><label>Business / Organisation Name *</label><input type="text" id="sf-bizname" placeholder="Registered business name"></div>
+      <div class="form-group"><label>Business Category (DNFBP Type) *</label>
+        <select id="sf-category">
+          <option value="">Select your business type...</option>
+          <option>Legal Practitioner / Law Firm</option><option>Real Estate Agent / Developer</option>
+          <option>Dealer in Precious Metals / Stones / Jewellery</option>
+          <option>Accountant / Auditor / Tax Consultant</option><option>Car / Automobile Dealer</option>
+          <option>Hotel / Hospitality Business</option><option>Supermarket / High-Value Retail</option>
+          <option>NGO / Non-Profit / Foundation</option><option>Casino / Gaming</option><option>Other DNFBP</option>
+        </select>
+      </div>
+      <div class="two-col">
+        <div class="form-group"><label>CAC Registration Number *</label><input type="text" id="sf-cacnum" placeholder="RC/BN number"></div>
+        <div class="form-group"><label>Year Business Started</label><input type="text" id="sf-year" placeholder="e.g. 2019"></div>
+      </div>
+      <div class="form-group"><label>Business Address *</label><input type="text" id="sf-address" placeholder="Full registered business address"></div>
+      <div class="two-col">
+        <div class="form-group"><label>State *</label><select id="sf-state"><option value="">Select state...</option>
+          <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+          <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+          <option>Benue</option><option>Borno</option><option>Cross River</option>
+          <option>Delta</option><option>Ebonyi</option><option>Edo</option>
+          <option>Ekiti</option><option>Enugu</option><option>FCT (Abuja)</option>
+          <option>Gombe</option><option>Imo</option><option>Jigawa</option>
+          <option>Kaduna</option><option>Kano</option><option>Katsina</option>
+          <option>Kebbi</option><option>Kogi</option><option>Kwara</option>
+          <option>Lagos</option><option>Nasarawa</option><option>Niger</option>
+          <option>Ogun</option><option>Ondo</option><option>Osun</option>
+          <option>Oyo</option><option>Plateau</option><option>Rivers</option>
+          <option>Sokoto</option><option>Taraba</option><option>Yobe</option>
+          <option>Zamfara</option></select></div>
+        <div class="form-group"><label>Annual Turnover (approx.)</label>
+          <select id="sf-turnover">
+            <option value="">Select range...</option>
+            <option>Below ₦5M</option><option>₦5M – ₦50M</option>
+            <option>₦50M – ₦200M</option><option>Above ₦200M</option><option>Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Do You Have an Existing AML/CFT Policy? *</label>
+        <select id="sf-aml">
+          <option value="">Select...</option>
+          <option>Yes, we have one</option><option>No, we need one drafted</option><option>Not sure</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Have You Registered with SCUML Before?</label>
+        <select id="sf-prev">
+          <option value="">Select...</option>
+          <option>No, first time</option><option>Yes, renewing registration</option>
+          <option>Yes, but registration lapsed</option>
+        </select>
+      </div>
+
+      <hr class="form-divider">
+      <span class="form-section-label">Contact / Compliance Officer</span>
+      <div class="form-group"><label>Full Name *</label><input type="text" id="sf-fullname" placeholder="Compliance Officer or Director's name"></div>
+      <div class="two-col">
+        <div class="form-group"><label>Phone Number *</label><input type="tel" id="sf-phone" placeholder="+234 800 000 0000"></div>
+        <div class="form-group"><label>Email Address *</label><input type="email" id="sf-email" placeholder="you@email.com"></div>
+      </div>
+      <div class="form-group"><label>Position / Title *</label><input type="text" id="sf-position" placeholder="e.g. Managing Director, Compliance Officer"></div>
+      <div class="form-group"><label>Additional Information / Urgency</label>
+        <textarea id="sf-notes" placeholder="Any deadlines, regulatory notices received, or questions..."></textarea>
+      </div>
+            <hr class="form-divider">
+      <div class="form-group">
+        <label>Referral Code <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+        <input type="text" id="sf-referral" placeholder="Enter referral code if you have one" style="letter-spacing:2px;">
+      </div>
+      <div id="scuml-form-error" style="display:none;font-size:13px;color:var(--red);margin:12px 0;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
+      <button id="scuml-submit-btn" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;margin-top:8px;background:var(--blue);box-shadow:0 8px 32px rgba(74,144,217,0.3);" onclick="submitSCUMLForm()">
+        &#128737;&#65039; Submit SCUML Registration Request
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:14px;">&#128274; Your information is 100% confidential.</p>
+    </div>
+  </div>
+  <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:20px 40px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('scuml')" style="cursor:pointer;color:var(--blue);">&#8592; Back to SCUML</span></div></footer>
+</div>
+
+<!-- CERT FORM -->
+<div id="page-cert-form" class="page">
+  <div style="padding:110px 24px 48px;max-width:700px;margin:0 auto;text-align:center;">
+    <div class="badge" style="color:var(--red);border-color:rgba(232,93,93,0.3);background:rgba(232,93,93,0.1);">&#127891; Free Certifications</div>
+    <h1 class="section-title" style="font-size:clamp(26px,5vw,44px);margin:16px 0 12px;">Find Your <em style="font-style:normal;color:var(--red);">Free Certificate</em></h1>
+    <p style="color:var(--muted);font-size:15px;max-width:500px;margin:0 auto 36px;line-height:1.7;">Tell us about yourself and we will match you to the best globally recognised free professional certifications — tailored to your background and career goals.</p>
+    <div class="contact-form" id="cert-form-wrapper" style="max-width:640px;margin:0 auto;text-align:left;">
+
+      <span class="form-section-label">Personal Information</span>
+      <div class="form-group"><label>Full Name *</label><input type="text" id="cef-name" placeholder="Your full name"></div>
+      <div class="two-col">
+        <div class="form-group"><label>Date of Birth *</label><input type="date" id="cef-dob"></div>
+        <div class="form-group"><label>Gender</label>
+          <select id="cef-gender">
+            <option value="">Select...</option><option>Male</option><option>Female</option><option>Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="form-group"><label>Phone Number *</label><input type="tel" id="cef-phone" placeholder="+234 800 000 0000"></div>
+        <div class="form-group"><label>Email Address *</label><input type="email" id="cef-email" placeholder="you@email.com"></div>
+      </div>
+      <div class="two-col">
+        <div class="form-group"><label>Country *</label>
+          <select id="cef-country">
+            <option value="">Select...</option><option>Nigeria</option><option>Ghana</option>
+            <option>Kenya</option><option>South Africa</option><option>United Kingdom</option>
+            <option>United States</option><option>Canada</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>State / Region *</label><select id="cef-state"><option value="">Select state...</option>
+          <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+          <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+          <option>Benue</option><option>Borno</option><option>Cross River</option>
+          <option>Delta</option><option>Ebonyi</option><option>Edo</option>
+          <option>Ekiti</option><option>Enugu</option><option>FCT (Abuja)</option>
+          <option>Gombe</option><option>Imo</option><option>Jigawa</option>
+          <option>Kaduna</option><option>Kano</option><option>Katsina</option>
+          <option>Kebbi</option><option>Kogi</option><option>Kwara</option>
+          <option>Lagos</option><option>Nasarawa</option><option>Niger</option>
+          <option>Ogun</option><option>Ondo</option><option>Osun</option>
+          <option>Oyo</option><option>Plateau</option><option>Rivers</option>
+          <option>Sokoto</option><option>Taraba</option><option>Yobe</option>
+          <option>Zamfara</option></select></div>
+      </div>
+
+      <hr class="form-divider">
+      <span class="form-section-label">Educational Background</span>
+      <div class="form-group"><label>Highest Qualification *</label>
+        <select id="cef-edu">
+          <option value="">Select...</option>
+          <option>WAEC / NECO / O-Level</option><option>National Diploma (ND)</option>
+          <option>Higher National Diploma (HND)</option><option>Bachelor's Degree (B.Sc / B.A / B.Eng)</option>
+          <option>Postgraduate Diploma (PGD)</option><option>Master's Degree (M.Sc / MBA)</option>
+          <option>PhD / Doctorate</option><option>Professional Qualification (ICAN, ACCA etc.)</option>
+        </select>
+      </div>
+      <div class="two-col">
+        <div class="form-group"><label>Course / Field of Study *</label><input type="text" id="cef-course" placeholder="e.g. Business Admin, Computer Science"></div>
+        <div class="form-group"><label>Institution Attended</label><input type="text" id="cef-institution" placeholder="University / Polytechnic name"></div>
+      </div>
+
+      <hr class="form-divider">
+      <span class="form-section-label">Career &amp; Certification Preferences</span>
+      <div class="two-col">
+        <div class="form-group"><label>Employment Status *</label>
+          <select id="cef-employment">
+            <option value="">Select...</option>
+            <option>Employed (Full-time)</option><option>Employed (Part-time)</option>
+            <option>Self-employed / Entrepreneur</option><option>Unemployed / Job Seeking</option>
+            <option>Student</option><option>Freelancer</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Industry / Sector *</label>
+          <select id="cef-industry">
+            <option value="">Select...</option>
+            <option>Technology &amp; IT</option><option>Finance &amp; Banking</option>
+            <option>Healthcare &amp; Public Health</option><option>Agriculture &amp; Agribusiness</option>
+            <option>Project &amp; Business Management</option><option>Marketing &amp; Digital Media</option>
+            <option>Education &amp; Training</option><option>Oil &amp; Gas / Engineering</option>
+            <option>NGO &amp; Social Work</option><option>Supply Chain &amp; Logistics</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Certificate Type You Want *</label>
+        <select id="cef-certtype">
+          <option value="">Select...</option>
+          <option>Digital &amp; Tech (Google, AWS, Microsoft, Cisco)</option>
+          <option>Project Management (PMP, CAPM, PRINCE2)</option>
+          <option>Data Science &amp; Analytics</option><option>Cybersecurity</option>
+          <option>Finance &amp; Accounting (CFA, ACCA, ICAN)</option>
+          <option>Healthcare &amp; Public Health (WHO, CDC backed)</option>
+          <option>Agribusiness &amp; Food Security (IFAD, FAO)</option>
+          <option>Human Resources (SHRM, CIPD)</option>
+          <option>Digital Marketing (Google, HubSpot, Meta)</option>
+          <option>Supply Chain &amp; Logistics (CIPS, APICS)</option>
+          <option>Not sure — recommend the best for me</option>
+        </select>
+      </div>
+      <div class="two-col">
+        <div class="form-group"><label>Main Goal *</label>
+          <select id="cef-goal">
+            <option value="">Select...</option>
+            <option>Get a new job or promotion</option><option>Grow my business</option>
+            <option>Qualify for grants or funding</option><option>Personal development</option>
+            <option>Career transition</option><option>Meet a professional requirement</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Available Study Time / Week</label>
+          <select id="cef-study">
+            <option value="">Select...</option>
+            <option>Less than 3 hours</option><option>3–7 hours</option>
+            <option>8–15 hours</option><option>More than 15 hours</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Internet / Device Access *</label>
+        <select id="cef-access">
+          <option value="">Select...</option>
+          <option>Smartphone and laptop/PC</option><option>Smartphone only</option>
+          <option>Shared / limited access</option><option>No regular access</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Anything Else We Should Know?</label>
+        <textarea id="cef-notes" placeholder="Tell us more about your background, goals, or any specific certifications you've heard about..."></textarea>
+      </div>
+            <hr class="form-divider">
+      <div class="form-group">
+        <label>Referral Code <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+        <input type="text" id="cef-referral" placeholder="Enter referral code if you have one" style="letter-spacing:2px;">
+      </div>
+      <div id="cert-form-error" style="display:none;font-size:13px;color:var(--red);margin:12px 0;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
+      <button id="cert-submit-btn" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;margin-top:8px;background:var(--red);box-shadow:0 8px 32px rgba(232,93,93,0.3);" onclick="submitCertForm()">
+        &#127891; Find My Free Certificate
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:14px;">&#128274; Your information is 100% confidential.</p>
+    </div>
+  </div>
+  <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:20px 40px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('cert')" style="cursor:pointer;color:var(--red);">&#8592; Back to Certifications</span></div></footer>
+</div>
+
+<!-- STOCK FORM -->
+<div id="page-stock-form" class="page">
+  <div style="padding:110px 24px 48px;max-width:700px;margin:0 auto;text-align:center;">
+    <div class="badge" style="color:var(--gold);border-color:rgba(201,150,58,0.3);background:rgba(201,150,58,0.1);">&#128200; Stock Options</div>
+    <h1 class="section-title" style="font-size:clamp(26px,5vw,44px);margin:16px 0 12px;">Get Your Free <em style="font-style:normal;color:var(--gold);">Weekly Stock Picks</em></h1>
+    <p style="color:var(--muted);font-size:15px;max-width:500px;margin:0 auto 36px;line-height:1.7;">Tell us about your investment profile and we will send you personalised weekly stock recommendations — Nigerian and US markets, completely free.</p>
+    <div class="contact-form" id="stock-form-wrapper" style="max-width:640px;margin:0 auto;text-align:left;">
+
+      <span class="form-section-label">Your Details</span>
+      <div class="form-group"><label>Full Name *</label><input type="text" id="stf-name" placeholder="Your full name"></div>
+      <div class="two-col">
+        <div class="form-group"><label>Phone / WhatsApp *</label><input type="tel" id="stf-phone" placeholder="+234 800 000 0000"></div>
+        <div class="form-group"><label>Email Address *</label><input type="email" id="stf-email" placeholder="you@email.com"></div>
+      </div>
+      <div class="two-col">
+        <div class="form-group"><label>Country *</label>
+          <select id="stf-country">
+            <option value="">Select...</option><option>Nigeria</option><option>Ghana</option>
+            <option>Kenya</option><option>United Kingdom</option><option>United States</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>State *</label><select id="stf-state"><option value="">Select state...</option>
+          <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+          <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+          <option>Benue</option><option>Borno</option><option>Cross River</option>
+          <option>Delta</option><option>Ebonyi</option><option>Edo</option>
+          <option>Ekiti</option><option>Enugu</option><option>FCT (Abuja)</option>
+          <option>Gombe</option><option>Imo</option><option>Jigawa</option>
+          <option>Kaduna</option><option>Kano</option><option>Katsina</option>
+          <option>Kebbi</option><option>Kogi</option><option>Kwara</option>
+          <option>Lagos</option><option>Nasarawa</option><option>Niger</option>
+          <option>Ogun</option><option>Ondo</option><option>Osun</option>
+          <option>Oyo</option><option>Plateau</option><option>Rivers</option>
+          <option>Sokoto</option><option>Taraba</option><option>Yobe</option>
+          <option>Zamfara</option></select></div>
+      </div>
+
+      <hr class="form-divider">
+      <span class="form-section-label">Investment Profile</span>
+      <div class="form-group"><label>Investment Experience Level *</label>
+        <select id="stf-experience">
+          <option value="">Select...</option>
+          <option>Complete beginner — never bought stocks</option>
+          <option>Beginner — bought a few times</option>
+          <option>Intermediate — invest regularly</option>
+          <option>Advanced — experienced trader</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Markets of Interest *</label>
+        <select id="stf-market">
+          <option value="">Select...</option>
+          <option>Nigerian Stock Exchange (NGX) only</option>
+          <option>US Markets (NYSE / NASDAQ) only</option>
+          <option>Both NGX and US Markets</option>
+          <option>Not sure — advise me</option>
+        </select>
+      </div>
+      <div class="two-col">
+        <div class="form-group"><label>Typical Weekly Budget</label>
+          <select id="stf-budget">
+            <option value="">Select...</option>
+            <option>Below ₦10,000</option><option>₦10,000 – ₦50,000</option>
+            <option>₦50,000 – ₦200,000</option><option>Above ₦200,000</option>
+            <option>Just learning for now</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Investment Goal *</label>
+          <select id="stf-goal">
+            <option value="">Select...</option>
+            <option>Long-term wealth building</option><option>Dividend income</option>
+            <option>Short-term trading gains</option><option>Learning how to invest</option>
+            <option>Diversify existing portfolio</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group"><label>Do You Currently Own Any Stocks?</label>
+        <select id="stf-owns">
+          <option value="">Select...</option>
+          <option>No</option><option>Yes — Nigerian stocks</option>
+          <option>Yes — US stocks</option><option>Yes — both</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Broker / Platform You Use (if any)</label>
+        <input type="text" id="stf-broker" placeholder="e.g. Chaka, Bamboo, Rise, Trove, Stanbic, Meristem, none yet...">
+      </div>
+      <div class="form-group"><label>Preferred Delivery Channel *</label>
+        <select id="stf-channel">
+          <option value="">Select...</option>
+          <option>Email</option><option>WhatsApp</option><option>Both Email and WhatsApp</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Any Specific Stocks or Sectors You Are Curious About?</label>
+        <textarea id="stf-notes" placeholder="e.g. I'm interested in Dangote Cement, Nigerian banks, or US tech stocks like Apple..."></textarea>
+      </div>
+            <hr class="form-divider">
+      <div class="form-group">
+        <label>Referral Code <span style="color:var(--muted);font-weight:400;">(optional)</span></label>
+        <input type="text" id="stf-referral" placeholder="Enter referral code if you have one" style="letter-spacing:2px;">
+      </div>
+      <div id="stock-form-error" style="display:none;font-size:13px;color:var(--red);margin:12px 0;padding:10px 14px;background:rgba(232,93,93,0.1);border-radius:8px;border:1px solid rgba(232,93,93,0.25);"></div>
+      <button id="stock-submit-btn" class="btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:18px;margin-top:8px;" onclick="submitStockForm()">
+        &#128200; Get My Free Weekly Stock Picks
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-top:14px;">&#128274; Your information is 100% confidential. We never spam.</p>
+    </div>
+  </div>
+  <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:20px 40px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('stock')" style="cursor:pointer;color:var(--gold);">&#8592; Back to Stock Options</span></div></footer>
+</div>
 <!-- CONTACT -->
 <div id="page-contact" class="page">
   <div style="padding:120px 60px 80px;max-width:1200px;margin:0 auto;text-align:center;">
@@ -609,11 +1160,20 @@
       <div class="form-group">
         <label>State of Residence *</label>
         <select id="f-state">
-          <option value="">Select your state...</option>
-          <option>Lagos</option><option>Abuja (FCT)</option><option>Rivers</option>
-          <option>Kano</option><option>Ogun</option><option>Oyo</option>
-          <option>Anambra</option><option>Delta</option><option>Enugu</option>
-          <option>Kaduna</option><option>Imo</option><option>Borno</option><option>Other</option>
+<option value="">Select state...</option>
+          <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+          <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+          <option>Benue</option><option>Borno</option><option>Cross River</option>
+          <option>Delta</option><option>Ebonyi</option><option>Edo</option>
+          <option>Ekiti</option><option>Enugu</option><option>FCT (Abuja)</option>
+          <option>Gombe</option><option>Imo</option><option>Jigawa</option>
+          <option>Kaduna</option><option>Kano</option><option>Katsina</option>
+          <option>Kebbi</option><option>Kogi</option><option>Kwara</option>
+          <option>Lagos</option><option>Nasarawa</option><option>Niger</option>
+          <option>Ogun</option><option>Ondo</option><option>Osun</option>
+          <option>Oyo</option><option>Plateau</option><option>Rivers</option>
+          <option>Sokoto</option><option>Taraba</option><option>Yobe</option>
+          <option>Zamfara</option>
         </select>
       </div>
       <div class="form-group">
@@ -649,7 +1209,7 @@
       <h1 class="section-title">Weekly Stock Options Advice — <em style="font-style:normal;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Free & Expert</em></h1>
       <p class="section-sub">We give you free, expert advice on stocks you can buy on a weekly basis. No hype, no paid groups — just clear, actionable picks from Nigerian and US markets, explained in plain English.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <button class="btn-primary" onclick="showPage('contact')">Get Free Picks</button>
+        <button class="btn-primary" onclick="showPage('stock-form')">Get Free Picks</button>
         <button class="btn-outline" onclick="document.getElementById('stock-newsletter').scrollIntoView({behavior:'smooth'})">Join Weekly List</button>
       </div>
     </div>
@@ -712,71 +1272,252 @@
     hamburger.classList.remove('active');
   }
 
-  /* ── GOOGLE FORMS SUBMISSION ── */
-  function submitToGoogleForms() {
-    var btn     = document.getElementById('submit-btn');
-    var errBox  = document.getElementById('form-error');
-    var wrapper = document.getElementById('contact-form-wrapper');
-
-    var name    = document.getElementById('f-name').value.trim();
-    var phone   = document.getElementById('f-phone').value.trim();
-    var email   = document.getElementById('f-email').value.trim();
-    var state   = document.getElementById('f-state').value;
-    var service = document.getElementById('f-service').value;
-    var message = document.getElementById('f-message').value.trim();
-
-    function showError(msg) {
-      errBox.textContent = '\u26A0 ' + msg;
-      errBox.style.display = 'block';
-      errBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-
-    errBox.style.display = 'none';
-    if (!name)                          { showError('Please enter your full name.'); return; }
-    if (!phone)                         { showError('Please enter your phone number.'); return; }
-    if (!email || email.indexOf('@') < 0){ showError('Please enter a valid email address.'); return; }
-    if (!state)                         { showError('Please select your state of residence.'); return; }
-    if (!service)                       { showError('Please select a service of interest.'); return; }
-
-    btn.innerHTML = '&#9203; Submitting...';
-    btn.disabled = true;
-    btn.style.opacity = '0.7';
-
-    var FORM_ID = '1FAIpQLSc-YHPa3CwPGoqrWQXRz3JGENkV_XMmdffaBESK4ba0y99pdw';
-    var params = new URLSearchParams();
-    params.append('entry.2005620554', name);
-    params.append('entry.1065046570', phone);
-    params.append('entry.1045781291', email);
-    params.append('entry.323759865',  state);
-    params.append('entry.589719973',  service);
-    params.append('entry.1166974658', message);
-    params.append('entry.839337160',  name);
-
-    var url = 'https://docs.google.com/forms/d/e/' + FORM_ID + '/formResponse?' + params.toString();
-
-    fetch(url, { method: 'POST', mode: 'no-cors' })
-      .then(function() {
-        wrapper.innerHTML =
-          '<div style="text-align:center;padding:52px 20px;">' +
-            '<div style="font-size:72px;margin-bottom:20px;">&#9989;</div>' +
-            '<h3 style="font-family:\'Playfair Display\',serif;font-size:30px;margin-bottom:14px;">Submission Received!</h3>' +
-            '<p style="color:var(--muted);font-size:15px;line-height:1.8;max-width:380px;margin:0 auto 32px;">' +
-              'Thank you, <strong style="color:var(--white);">' + name + '</strong>! &#127881;<br>' +
-              'Our team will contact you at <strong style="color:var(--gold);">' + phone + '</strong><br>within ' +
-              '<strong style="color:var(--gold);">2 hours</strong> with your personalised action plan.' +
-            '</p>' +
-            '<button class="btn-outline" onclick="showPage(\'home\')">&#8592; Back to Home</button>' +
-          '</div>';
-      })
-      .catch(function() {
-        showError('Something went wrong. Please call us directly at +234 800 GRANTPRO.');
-        btn.innerHTML = '&#128640; Submit \u2014 Get Free Consultation';
-        btn.disabled = false;
-        btn.style.opacity = '1';
-      });
+  /* ══ SUCCESS OVERLAY ══ */
+  function showSuccess(icon, title, msg, color) {
+    var ref = Math.random().toString(36).substr(2,8).toUpperCase();
+    document.getElementById('s-icon').textContent = icon;
+    document.getElementById('s-title').textContent = title;
+    document.getElementById('s-title').style.color = color || 'var(--white)';
+    document.getElementById('s-msg').innerHTML = msg;
+    document.getElementById('s-ref').textContent = 'Ref: ' + ref;
+    document.getElementById('success-overlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSuccess() {
+    document.getElementById('success-overlay').classList.remove('show');
+    document.body.style.overflow = '';
+    var wrappers = ['grants-form-wrapper','cac-form-wrapper','scuml-form-wrapper',
+                    'cert-form-wrapper','stock-form-wrapper','contact-form-wrapper'];
+    wrappers.forEach(function(id) {
+      var w = document.getElementById(id);
+      if (!w) return;
+      w.querySelectorAll('input,select,textarea').forEach(function(el) { el.value = ''; });
+    });
+    var btns = {
+      'grants-submit-btn': '&#127942; Submit Grant Application Request',
+      'cac-submit-btn': '&#127963;&#65039; Submit CAC Registration Request',
+      'scuml-submit-btn': '&#128737;&#65039; Submit SCUML Registration Request',
+      'cert-submit-btn': '&#127891; Find My Free Certificate',
+      'stock-submit-btn': '&#128200; Get My Free Weekly Stock Picks',
+      'submit-btn': '&#128640; Submit — Get Free Consultation'
+    };
+    Object.keys(btns).forEach(function(id) {
+      var b = document.getElementById(id);
+      if (b) { b.disabled = false; b.style.opacity = '1'; b.innerHTML = btns[id]; }
+    });
+    showPage('home');
   }
 
-  /* ── STATS COUNTER ── */
+  /* ══ SHARED HELPERS ══ */
+  var SM = 'https://api.sheetmonkey.io/form/u7ArqBBAWwN8a7ktKuuJH';
+  function val(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
+  function sel(id) { var el = document.getElementById(id); return el ? el.value : ''; }
+
+  function doPost(payload, btnId, errId, icon, title, msg, color) {
+    var btn = document.getElementById(btnId);
+    btn.innerHTML = '&#9203; Submitting...';
+    btn.disabled = true; btn.style.opacity = '0.7';
+    fetch(SM, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) })
+      .then(function() { showSuccess(icon, title, msg, color); })
+      .catch(function() { showSuccess(icon, title, msg, color); });
+  }
+
+  function checkFields(fields, errId) {
+    var errBox = document.getElementById(errId);
+    errBox.style.display = 'none';
+    for (var i = 0; i < fields.length; i++) {
+      var f = fields[i];
+      var v = f.sel ? sel(f.id) : val(f.id);
+      var bad = !v || (f.email && v.indexOf('@') < 0);
+      if (bad) {
+        errBox.textContent = '\u26A0 ' + f.msg;
+        errBox.style.display = 'block';
+        document.getElementById(f.id).scrollIntoView({ behavior:'smooth', block:'center' });
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /* ══ GRANTS FORM ══ */
+  function submitGrantsForm() {
+    var ok = checkFields([
+      {id:'gf-name',      msg:'Please enter your full name.'},
+      {id:'gf-phone',     msg:'Please enter your phone number.'},
+      {id:'gf-email',     msg:'Please enter a valid email address.', email:true},
+      {id:'gf-state',     msg:'Please select your state.', sel:true},
+      {id:'gf-bizname',   msg:'Please enter your business name.'},
+      {id:'gf-biztype',   msg:'Please select your business type.', sel:true},
+      {id:'gf-sector',    msg:'Please select your business sector.', sel:true},
+      {id:'gf-granttype', msg:'Please select a grant type.', sel:true},
+      {id:'gf-prev',      msg:'Please indicate prior grant experience.', sel:true},
+      {id:'gf-purpose',   msg:'Please describe what the grant will be used for.'}
+    ], 'grants-form-error');
+    if (!ok) return;
+    doPost({
+      'Full Name': val('gf-name'), 'Phone': val('gf-phone'), 'Email': val('gf-email'),
+      'State': sel('gf-state'), 'Service': 'Grant Application — ' + sel('gf-granttype'),
+      'Message': 'Business: ' + val('gf-bizname') + ' | Type: ' + sel('gf-biztype') +
+        ' | Sector: ' + sel('gf-sector') + ' | CAC: ' + (val('gf-cacnum')||'N/A') +
+        ' | Employees: ' + sel('gf-employees') + ' | Turnover: ' + sel('gf-turnover') +
+        ' | Prev: ' + sel('gf-prev') + ' | Purpose: ' + val('gf-purpose'),
+      'Referral Code': val('gf-referral') || 'None',
+      'Submitted': new Date().toLocaleString('en-NG', {timeZone:'Africa/Lagos'})
+    }, 'grants-submit-btn', 'grants-form-error',
+    '\uD83C\uDFC6', 'Application Received!',
+    'Thank you, <strong>' + val('gf-name') + '</strong>!<br>Our grant specialists will call <strong style="color:var(--gold);">' + val('gf-phone') + '</strong> within 2 hours to review your eligibility.',
+    'var(--gold)');
+  }
+
+  /* ══ CAC FORM ══ */
+  function submitCACForm() {
+    var ok = checkFields([
+      {id:'cf2-type',      msg:'Please select a registration type.', sel:true},
+      {id:'cf2-name1',     msg:'Please enter your proposed business name.'},
+      {id:'cf2-nature',    msg:'Please describe your nature of business.'},
+      {id:'cf2-address',   msg:'Please enter your business address.'},
+      {id:'cf2-state',     msg:'Please select your state.', sel:true},
+      {id:'cf2-directors', msg:'Please select number of directors.', sel:true},
+      {id:'cf2-fullname',  msg:'Please enter the director/owner full name.'},
+      {id:'cf2-phone',     msg:'Please enter a phone number.'},
+      {id:'cf2-email',     msg:'Please enter a valid email address.', email:true},
+      {id:'cf2-idtype',    msg:'Please select your ID type.', sel:true}
+    ], 'cac-form-error');
+    if (!ok) return;
+    doPost({
+      'Full Name': val('cf2-fullname'), 'Phone': val('cf2-phone'), 'Email': val('cf2-email'),
+      'State': sel('cf2-state'), 'Service': 'CAC Registration — ' + sel('cf2-type'),
+      'Message': 'Name 1: ' + val('cf2-name1') + (val('cf2-name2') ? ' / ' + val('cf2-name2') : '') +
+        ' | Nature: ' + val('cf2-nature') + ' | Address: ' + val('cf2-address') +
+        ' | Directors: ' + sel('cf2-directors') + ' | Capital: ' + sel('cf2-capital') +
+        ' | ID: ' + sel('cf2-idtype') + (val('cf2-notes') ? ' | Notes: ' + val('cf2-notes') : ''),
+      'Referral Code': val('cf2-referral') || 'None',
+      'Submitted': new Date().toLocaleString('en-NG', {timeZone:'Africa/Lagos'})
+    }, 'cac-submit-btn', 'cac-form-error',
+    '\uD83C\uDFE2', 'Registration Request Received!',
+    'Thank you, <strong>' + val('cf2-fullname') + '</strong>!<br>Our CAC team will contact <strong style="color:var(--green);">' + val('cf2-phone') + '</strong> within 2 hours.',
+    'var(--green)');
+  }
+
+  /* ══ SCUML FORM ══ */
+  function submitSCUMLForm() {
+    var ok = checkFields([
+      {id:'sf-bizname',  msg:'Please enter your business name.'},
+      {id:'sf-category', msg:'Please select your business category.', sel:true},
+      {id:'sf-cacnum',   msg:'Please enter your CAC registration number.'},
+      {id:'sf-address',  msg:'Please enter your business address.'},
+      {id:'sf-state',    msg:'Please select your state.', sel:true},
+      {id:'sf-aml',      msg:'Please indicate your AML/CFT policy status.', sel:true},
+      {id:'sf-fullname', msg:'Please enter the contact person name.'},
+      {id:'sf-phone',    msg:'Please enter a phone number.'},
+      {id:'sf-email',    msg:'Please enter a valid email address.', email:true},
+      {id:'sf-position', msg:'Please enter your position/title.'}
+    ], 'scuml-form-error');
+    if (!ok) return;
+    doPost({
+      'Full Name': val('sf-fullname'), 'Phone': val('sf-phone'), 'Email': val('sf-email'),
+      'State': sel('sf-state'), 'Service': 'SCUML Registration — ' + sel('sf-category'),
+      'Message': 'Business: ' + val('sf-bizname') + ' | CAC: ' + val('sf-cacnum') +
+        ' | Year: ' + (val('sf-year')||'N/A') + ' | Address: ' + val('sf-address') +
+        ' | Turnover: ' + sel('sf-turnover') + ' | AML: ' + sel('sf-aml') +
+        ' | Prev: ' + sel('sf-prev') + ' | Position: ' + val('sf-position') +
+        (val('sf-notes') ? ' | Notes: ' + val('sf-notes') : ''),
+      'Referral Code': val('sf-referral') || 'None',
+      'Submitted': new Date().toLocaleString('en-NG', {timeZone:'Africa/Lagos'})
+    }, 'scuml-submit-btn', 'scuml-form-error',
+    '\uD83D\uDEE1\uFE0F', 'SCUML Request Received!',
+    'Thank you, <strong>' + val('sf-fullname') + '</strong>!<br>Our compliance team will call <strong style="color:var(--blue);">' + val('sf-phone') + '</strong> within 2 hours.',
+    'var(--blue)');
+  }
+
+  /* ══ CERT FORM ══ */
+  function submitCertForm() {
+    var ok = checkFields([
+      {id:'cef-name',       msg:'Please enter your full name.'},
+      {id:'cef-dob',        msg:'Please enter your date of birth.'},
+      {id:'cef-phone',      msg:'Please enter your phone number.'},
+      {id:'cef-email',      msg:'Please enter a valid email address.', email:true},
+      {id:'cef-country',    msg:'Please select your country.', sel:true},
+      {id:'cef-state',      msg:'Please select your state.', sel:true},
+      {id:'cef-edu',        msg:'Please select your highest qualification.', sel:true},
+      {id:'cef-course',     msg:'Please enter your course/field of study.'},
+      {id:'cef-employment', msg:'Please select your employment status.', sel:true},
+      {id:'cef-industry',   msg:'Please select your industry.', sel:true},
+      {id:'cef-certtype',   msg:'Please select the certificate type you want.', sel:true},
+      {id:'cef-goal',       msg:'Please select your main goal.', sel:true},
+      {id:'cef-access',     msg:'Please select your internet/device access.', sel:true}
+    ], 'cert-form-error');
+    if (!ok) return;
+    doPost({
+      'Full Name': val('cef-name'), 'Phone': val('cef-phone'), 'Email': val('cef-email'),
+      'State': sel('cef-country') + ' — ' + sel('cef-state'),
+      'Service': 'Free Certification — ' + sel('cef-certtype'),
+      'Message': 'DOB: ' + val('cef-dob') + ' | Gender: ' + sel('cef-gender') +
+        ' | Edu: ' + sel('cef-edu') + ' | Course: ' + val('cef-course') +
+        (val('cef-institution') ? ' (' + val('cef-institution') + ')' : '') +
+        ' | Employment: ' + sel('cef-employment') + ' | Industry: ' + sel('cef-industry') +
+        ' | Goal: ' + sel('cef-goal') + ' | Study/wk: ' + sel('cef-study') +
+        ' | Access: ' + sel('cef-access') + (val('cef-notes') ? ' | Notes: ' + val('cef-notes') : ''),
+      'Referral Code': val('cef-referral') || 'None',
+      'Submitted': new Date().toLocaleString('en-NG', {timeZone:'Africa/Lagos'})
+    }, 'cert-submit-btn', 'cert-form-error',
+    '\uD83C\uDF93', 'Profile Received!',
+    'Thank you, <strong>' + val('cef-name') + '</strong>!<br>Our certification experts will contact <strong style="color:var(--red);">' + val('cef-phone') + '</strong> within 24 hours with your free certificate matches.',
+    'var(--red)');
+  }
+
+  /* ══ STOCK FORM ══ */
+  function submitStockForm() {
+    var ok = checkFields([
+      {id:'stf-name',       msg:'Please enter your full name.'},
+      {id:'stf-phone',      msg:'Please enter your phone/WhatsApp number.'},
+      {id:'stf-email',      msg:'Please enter a valid email address.', email:true},
+      {id:'stf-country',    msg:'Please select your country.', sel:true},
+      {id:'stf-state',      msg:'Please select your state.', sel:true},
+      {id:'stf-experience', msg:'Please select your investment experience.', sel:true},
+      {id:'stf-market',     msg:'Please select your market of interest.', sel:true},
+      {id:'stf-goal',       msg:'Please select your investment goal.', sel:true},
+      {id:'stf-channel',    msg:'Please select your preferred delivery channel.', sel:true}
+    ], 'stock-form-error');
+    if (!ok) return;
+    doPost({
+      'Full Name': val('stf-name'), 'Phone': val('stf-phone'), 'Email': val('stf-email'),
+      'State': sel('stf-country') + ' — ' + sel('stf-state'),
+      'Service': 'Stock Options — ' + sel('stf-market'),
+      'Message': 'Experience: ' + sel('stf-experience') + ' | Budget: ' + sel('stf-budget') +
+        ' | Goal: ' + sel('stf-goal') + ' | Owns stocks: ' + sel('stf-owns') +
+        ' | Broker: ' + (val('stf-broker')||'None') + ' | Channel: ' + sel('stf-channel') +
+        (val('stf-notes') ? ' | Interests: ' + val('stf-notes') : ''),
+      'Referral Code': val('stf-referral') || 'None',
+      'Submitted': new Date().toLocaleString('en-NG', {timeZone:'Africa/Lagos'})
+    }, 'stock-submit-btn', 'stock-form-error',
+    '\uD83D\uDCC8', "You're On the List!",
+    'Thank you, <strong>' + val('stf-name') + '</strong>!<br>Your first free stock picks will be sent to <strong style="color:var(--gold);">' + val('stf-email') + '</strong> this Monday.',
+    'var(--gold)');
+  }
+
+  /* ══ GENERAL CONTACT FORM ══ */
+  function submitToGoogleForms() {
+    var ok = checkFields([
+      {id:'f-name',    msg:'Please enter your full name.'},
+      {id:'f-phone',   msg:'Please enter your phone number.'},
+      {id:'f-email',   msg:'Please enter a valid email address.', email:true},
+      {id:'f-state',   msg:'Please select your state of residence.', sel:true},
+      {id:'f-service', msg:'Please select a service of interest.', sel:true}
+    ], 'form-error');
+    if (!ok) return;
+    doPost({
+      'Full Name': val('f-name'), 'Phone': val('f-phone'), 'Email': val('f-email'),
+      'State': sel('f-state'), 'Service': sel('f-service'), 'Message': val('f-message'),
+      'Referral Code': 'None',
+      'Submitted': new Date().toLocaleString('en-NG', {timeZone:'Africa/Lagos'})
+    }, 'submit-btn', 'form-error',
+    '\u2705', 'Submission Received!',
+    'Thank you, <strong>' + val('f-name') + '</strong>!<br>Our team will contact <strong style="color:var(--gold);">' + val('f-phone') + '</strong> within 2 hours.',
+    'var(--gold)');
+  }
+
+    /* ── STATS COUNTER ── */
   function animateCounters() {
     var items = document.querySelectorAll('.stat-num');
     items.forEach(function(el) {
