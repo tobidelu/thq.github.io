@@ -1567,13 +1567,17 @@
     btn.disabled = true;
     
     // Replace this with your actual newsletter service (Mailchimp, ConvertKit, Google Sheets)
-    var NEWSLETTER_FORM_ID = '1FAIpQLSc-YHPa3CwPGoqrWQXRz3JGENkV_XMmdffaBESK4ba0y99pdw';
-    var params = new URLSearchParams();
-    params.append('entry.1045781291', email); // using same email field as contact form
+    // CONNECTED TO SHEETMONKEY
+    var SHEETMONKEY_URL = 'https://api.sheetmonkey.io/form/ihEnQbHC6zntbwCXzLi9qx';
     
-    fetch('https://docs.google.com/forms/d/e/' + NEWSLETTER_FORM_ID + '/formResponse?' + params.toString(), {
+    fetch(SHEETMONKEY_URL, {
       method: 'POST',
-      mode: 'no-cors'
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        Email: email,
+        Source: 'Newsletter',
+        Timestamp: new Date().toISOString()
+      })
     }).then(function() {
       msg.style.color = 'var(--green)';
       msg.innerHTML = '✅ Success! Check your email for confirmation. Welcome to GrantPro Insider!';
