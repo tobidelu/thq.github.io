@@ -25,6 +25,11 @@
   .nav-links a:hover,.nav-links a.active{color:var(--white);background:rgba(201,150,58,0.12);}
   .nav-cta{background:var(--gold)!important;color:var(--dark)!important;font-weight:600!important;padding:9px 20px!important;}
   .nav-cta:hover{background:var(--gold-light)!important;}
+  .hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:8px;z-index:101;}
+  .hamburger span{width:24px;height:2.5px;background:var(--white);border-radius:2px;transition:all .3s;}
+  .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+  .hamburger.active span:nth-child(2){opacity:0;}
+  .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);}
 
   .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 40px 80px;overflow:hidden;}
   .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,150,58,0.14) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 80% 80%,rgba(46,204,143,0.07) 0%,transparent 60%),linear-gradient(180deg,var(--dark) 0%,var(--dark-2) 100%);}
@@ -124,18 +129,65 @@
   @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 
   @media(max-width:900px){
-    nav{padding:16px 24px;}.nav-links{display:none;}
-    .section,.how-section{padding:60px 24px;}
-    .services-grid{grid-template-columns:1fr;}
-    .steps-grid{grid-template-columns:1fr 1fr;}
-    .testimonials-grid{grid-template-columns:1fr;}
-    .footer-grid{grid-template-columns:1fr 1fr;}
-    .service-hero{grid-template-columns:1fr;padding:120px 24px 60px;}
+    nav{padding:14px 20px;}
+    .hamburger{display:flex;}
+    .nav-links{position:fixed;top:60px;left:0;right:0;background:rgba(13,17,23,0.98);backdrop-filter:blur(20px);flex-direction:column;gap:0;padding:0;max-height:0;overflow:hidden;transition:max-height .3s ease;border-bottom:1px solid rgba(201,150,58,0.18);box-shadow:0 8px 24px rgba(0,0,0,0.4);}
+    .nav-links.active{max-height:400px;padding:12px 0;}
+    .nav-links a{padding:14px 24px;border-radius:0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:15px;}
+    .nav-links a:last-child{border-bottom:none;}
+    .nav-cta{margin:8px 20px!important;border-radius:8px!important;text-align:center;}
+    
+    .hero{min-height:85vh;padding:90px 20px 50px;}
+    .hero h1{font-size:clamp(30px,8.5vw,44px);line-height:1.15;margin-bottom:16px;}
+    .hero p{font-size:15px;line-height:1.6;margin-bottom:28px;padding:0 5px;}
+    .hero-btns{flex-direction:column;width:100%;max-width:300px;gap:10px;}
+    .btn-primary,.btn-outline{width:100%;justify-content:center;padding:13px 20px;font-size:14px;}
+    .badge{font-size:10px;letter-spacing:1px;padding:5px 12px;}
+    
+    .section,.how-section{padding:40px 18px;}
+    .section-title{font-size:clamp(22px,6vw,30px);line-height:1.2;}
+    .section-sub{font-size:14px;margin-bottom:28px;}
+    
+    .stats-bar{display:grid;grid-template-columns:1fr 1fr;gap:1px;padding:0;background:rgba(255,255,255,0.08);}
+    .stat-item{min-width:auto;padding:18px 12px;border:none;background:var(--dark);border-bottom:1px solid rgba(255,255,255,0.08);}
+    .stat-item:nth-child(odd){border-right:1px solid rgba(255,255,255,0.08);}
+    .stat-item:nth-last-child(-n+2){border-bottom:none;}
+    .stat-num{font-size:24px;margin-bottom:4px;}
+    .stat-label{font-size:11px;}
+    
+    .services-grid{grid-template-columns:1fr;gap:14px;}
+    .service-card{padding:22px;}
+    .service-card[style*="span"]{grid-column:span 1 !important;}
+    .card-icon{width:44px;height:44px;font-size:20px;margin-bottom:14px;}
+    .card-title{font-size:18px;margin-bottom:8px;}
+    .card-desc{font-size:13.5px;line-height:1.6;margin-bottom:14px;}
+    
+    .steps-grid{grid-template-columns:1fr;gap:12px;}
+    .step{padding:18px;}
+    .step-num{font-size:32px;margin-bottom:8px;}
+    .step h4{font-size:15px;}
+    .step p{font-size:13px;}
+    
+    .testimonials-grid{grid-template-columns:1fr;gap:14px;}
+    .testimonial{padding:18px;}
+    .testimonial-text{font-size:13.5px;}
+    
+    .cta-banner{margin:0 18px 40px;padding:28px 18px;border-radius:16px;}
+    .cta-banner h2{font-size:24px;}
+    .cta-banner p{font-size:14px;margin-bottom:24px;}
+    
+    .footer-grid{grid-template-columns:1fr;gap:24px;text-align:center;padding:0 20px;}
+    .footer-brand p{margin:10px auto 0;max-width:280px;}
+    
+    .service-hero{grid-template-columns:1fr;padding:90px 18px 36px;gap:24px;text-align:center;}
     .service-hero-img{display:none;}
-    .eligibility-grid{grid-template-columns:1fr;padding:0 24px 60px;}
-    .process-steps{padding:0 24px 60px;}
-    .cta-banner{margin:0 24px 60px;padding:40px 24px;}
-    .stats-bar{padding:40px 24px;}
+    .process-steps{padding:0 18px 40px;}
+    .process-step{padding:18px;flex-direction:column;text-align:center;gap:10px;}
+    .process-step:hover{transform:none;}
+    .step-icon{margin:0 auto;}
+    
+    .eligibility-grid{grid-template-columns:1fr;padding:0 18px 40px;gap:10px;}
+    .eligibility-item{padding:16px;}
   }
 </style>
 </head>
@@ -143,15 +195,20 @@
 
 <nav>
   <div class="nav-logo" onclick="showPage('home')">Grant<span>Pro</span></div>
-  <div class="nav-links">
-    <a onclick="showPage('home')" id="nav-home" class="active">Home</a>
-    <a onclick="showPage('grants')" id="nav-grants">Grants</a>
-    <a onclick="showPage('cac')" id="nav-cac">CAC Registration</a>
-    <a onclick="showPage('scuml')" id="nav-scuml">SCUML</a>
-    <a onclick="showPage('cert')" id="nav-cert">Certifications</a>
-    <a onclick="showPage('stock')" id="nav-stock">Stock Options</a>
-    <a onclick="showPage('blog')" id="nav-blog">Blog</a>
-    <a onclick="showPage('contact')" class="nav-cta" id="nav-contact">Get Started</a>
+  <div class="hamburger" onclick="toggleMenu()" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="nav-links" id="nav-links">
+    <a onclick="showPage('home');closeMenu()" id="nav-home" class="active">Home</a>
+    <a onclick="showPage('grants');closeMenu()" id="nav-grants">Grants</a>
+    <a onclick="showPage('cac');closeMenu()" id="nav-cac">CAC Registration</a>
+    <a onclick="showPage('scuml');closeMenu()" id="nav-scuml">SCUML</a>
+    <a onclick="showPage('cert');closeMenu()" id="nav-cert">Certifications</a>
+    <a onclick="showPage('stock');closeMenu()" id="nav-stock">Stock Options</a>
+    <a onclick="showPage('blog');closeMenu()" id="nav-blog">Blog</a>
+    <a onclick="showPage('contact');closeMenu()" class="nav-cta" id="nav-contact">Get Started</a>
   </div>
 </nav>
 
@@ -639,6 +696,20 @@
     var navEl = document.getElementById('nav-' + id);
     if (navEl) navEl.classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ── MOBILE MENU ── */
+  function toggleMenu() {
+    var nav = document.getElementById('nav-links');
+    var hamburger = document.getElementById('hamburger');
+    nav.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  }
+  function closeMenu() {
+    var nav = document.getElementById('nav-links');
+    var hamburger = document.getElementById('hamburger');
+    nav.classList.remove('active');
+    hamburger.classList.remove('active');
   }
 
   /* ── GOOGLE FORMS SUBMISSION ── */
