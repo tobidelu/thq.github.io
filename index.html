@@ -203,6 +203,171 @@
   .form-section-label{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;display:block;}
   .two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   @media(max-width:600px){.two-col{grid-template-columns:1fr;} .success-box{padding:36px 20px;} .s-icon{font-size:56px;} .s-title{font-size:20px;}}
+
+  /* ── THEME TRANSITION ── */
+  body,nav,.service-card,.step,.testimonial,.contact-form,.stats-bar,.stat-item,
+  .process-step,.eligibility-item,footer,.cta-banner,.success-box,
+  .form-group input,.form-group select,.form-group textarea,.how-section {
+    transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  }
+
+  /* ── THEME TOGGLE BUTTON ── */
+  #theme-toggle {
+    display: flex; align-items: center; gap: 9px;
+    background: none; border: none; cursor: pointer; padding: 4px 0; flex-shrink: 0;
+  }
+  .tgl-track {
+    width: 52px; height: 27px; border-radius: 999px;
+    background: var(--dark-3);
+    border: 1.5px solid rgba(201,150,58,0.35);
+    position: relative;
+    transition: background 0.35s, border-color 0.35s;
+  }
+  .tgl-thumb {
+    position: absolute; top: 3px; left: 3px;
+    width: 19px; height: 19px; border-radius: 50%;
+    background: linear-gradient(135deg,var(--gold),var(--gold-light));
+    box-shadow: 0 2px 8px rgba(201,150,58,0.5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; line-height: 1;
+    transition: transform 0.38s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .tgl-lbl {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); font-weight: 600; white-space: nowrap;
+    display: none;
+  }
+  @media(min-width:900px){.tgl-lbl{display:block;}}
+
+  /* ── LIGHT MODE ── */
+  body.light {
+    --dark:#F4F4F0; --dark-2:#FFFFFF; --dark-3:#EAEAE5;
+    --white:#1A1A2E; --muted:#5A6478;
+    background:#F4F4F0; color:#1A1A2E;
+  }
+  body.light nav {
+    background: rgba(244,244,240,0.95);
+    border-bottom-color: rgba(201,150,58,0.2);
+  }
+  body.light .tgl-track { background:#DCDCD6; border-color:rgba(201,150,58,0.4); }
+  body.light .tgl-thumb  { transform: translateX(25px); }
+  body.light .tgl-lbl    { color: var(--muted); }
+  body.light .hero-bg {
+    background: radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,150,58,0.09) 0%,transparent 65%),
+                radial-gradient(ellipse 40% 40% at 80% 80%,rgba(46,204,143,0.05) 0%,transparent 60%),
+                linear-gradient(180deg,#F4F4F0 0%,#EAEAE5 100%);
+  }
+  body.light .hero-grid {
+    background-image: linear-gradient(rgba(201,150,58,0.08) 1px,transparent 1px),
+                      linear-gradient(90deg,rgba(201,150,58,0.08) 1px,transparent 1px);
+  }
+  body.light .nav-links a { color:#5A6478; }
+  body.light .nav-links a:hover, body.light .nav-links a.active { color:#1A1A2E; background:rgba(201,150,58,0.1); }
+  body.light .service-card { background:#FFFFFF; border-color:rgba(0,0,0,0.08); }
+  body.light .service-card:hover { box-shadow:0 20px 60px rgba(0,0,0,0.12); border-color:rgba(201,150,58,0.3); }
+  body.light .step  { background:#F4F4F0; border-color:rgba(0,0,0,0.07); }
+  body.light .how-section { background:#EAEAE5; }
+  body.light .testimonial { background:#FFFFFF; border-color:rgba(0,0,0,0.08); }
+  body.light .contact-form { background:#FFFFFF; border-color:rgba(0,0,0,0.08); }
+  body.light .form-group input,
+  body.light .form-group select,
+  body.light .form-group textarea { background:#F4F4F0; border-color:rgba(0,0,0,0.12); color:#1A1A2E; }
+  body.light .form-group select option { background:#F4F4F0; color:#1A1A2E; }
+  body.light .btn-outline { color:#1A1A2E; border-color:rgba(0,0,0,0.2); }
+  body.light .btn-outline:hover { border-color:var(--gold); background:rgba(201,150,58,0.08); }
+  body.light .stats-bar { background:#EAEAE5; border-color:rgba(0,0,0,0.07); }
+  body.light .stat-item { border-color:rgba(0,0,0,0.07); background:#EAEAE5; }
+  body.light .cta-banner { background:linear-gradient(135deg,rgba(201,150,58,0.1) 0%,rgba(46,204,143,0.05) 100%); border-color:rgba(201,150,58,0.2); }
+  body.light footer { background:#EAEAE5; border-top-color:rgba(0,0,0,0.07); }
+  body.light .footer-bottom { border-top-color:rgba(0,0,0,0.07); }
+  body.light .process-step { background:#FFFFFF; border-color:rgba(0,0,0,0.07); }
+  body.light .eligibility-item { background:#FFFFFF; border-color:rgba(0,0,0,0.07); }
+  body.light .success-overlay { background:rgba(244,244,240,0.97); }
+  body.light .success-box { background:#FFFFFF; border-color:rgba(0,0,0,0.1); }
+  body.light .hamburger span { background:#1A1A2E; }
+
+  /* ── PAYMENT PAGE ── */
+  .plan-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin:40px 0; }
+  @media(max-width:900px){ .plan-grid{grid-template-columns:1fr; gap:16px;} }
+
+  .plan-card {
+    background:var(--dark-2); border:2px solid rgba(255,255,255,0.07);
+    border-radius:20px; padding:36px 28px; text-align:center;
+    position:relative; overflow:hidden; cursor:pointer;
+    transition:transform .3s, box-shadow .3s, border-color .3s;
+  }
+  .plan-card:hover { transform:translateY(-8px); box-shadow:0 24px 64px rgba(0,0,0,0.35); }
+  .plan-card.selected { border-color:var(--gold); box-shadow:0 0 0 4px rgba(201,150,58,0.18); }
+  .plan-card.vip-card.selected { border-color:var(--blue); box-shadow:0 0 0 4px rgba(74,144,217,0.18); }
+  .plan-card.vvip-card.selected { border-color:#A855F7; box-shadow:0 0 0 4px rgba(168,85,247,0.18); }
+
+  .plan-badge {
+    display:inline-block; padding:4px 14px; border-radius:100px;
+    font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+    margin-bottom:20px;
+  }
+  .plan-badge.regular { background:rgba(201,150,58,0.15); color:var(--gold); border:1px solid rgba(201,150,58,0.3); }
+  .plan-badge.vip     { background:rgba(74,144,217,0.15);  color:var(--blue); border:1px solid rgba(74,144,217,0.3); }
+  .plan-badge.vvip    { background:rgba(168,85,247,0.15);  color:#A855F7;     border:1px solid rgba(168,85,247,0.3); }
+
+  .plan-popular {
+    position:absolute; top:16px; right:16px;
+    background:#A855F7; color:#fff; font-size:10px; font-weight:700;
+    letter-spacing:1.5px; text-transform:uppercase; padding:4px 10px; border-radius:100px;
+  }
+
+  .plan-price {
+    font-family:'Space Mono',monospace; font-size:40px; font-weight:700;
+    line-height:1; margin-bottom:6px;
+  }
+  .plan-price .currency { font-size:22px; vertical-align:super; }
+  .plan-period { font-size:13px; color:var(--muted); margin-bottom:24px; }
+  .plan-name   { font-family:'Playfair Display',serif; font-size:22px; font-weight:700; margin-bottom:16px; }
+  .plan-desc   { font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:24px; min-height:64px; }
+
+  .plan-features { list-style:none; text-align:left; margin-bottom:28px; display:flex; flex-direction:column; gap:10px; }
+  .plan-features li { display:flex; align-items:center; gap:10px; font-size:14px; }
+  .plan-features li .fi { font-size:16px; flex-shrink:0; }
+
+  .plan-select-btn {
+    width:100%; padding:14px; border-radius:10px; font-size:15px; font-weight:700;
+    border:none; cursor:pointer; transition:transform .2s, box-shadow .2s, opacity .2s;
+    display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .plan-select-btn:hover { transform:translateY(-2px); }
+  .btn-regular { background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:var(--dark); box-shadow:0 6px 24px rgba(201,150,58,0.35); }
+  .btn-vip     { background:linear-gradient(135deg,var(--blue),#6ab0f5);           color:#fff;         box-shadow:0 6px 24px rgba(74,144,217,0.35); }
+  .btn-vvip    { background:linear-gradient(135deg,#A855F7,#C084FC);               color:#fff;         box-shadow:0 6px 24px rgba(168,85,247,0.35); }
+
+  .pay-form-box {
+    max-width:520px; margin:0 auto; background:var(--dark-2);
+    border:1px solid rgba(255,255,255,0.08); border-radius:20px; padding:40px;
+    display:none;
+  }
+  .pay-form-box.visible { display:block; animation:fadeUp .5s ease both; }
+  .pay-summary {
+    background:var(--dark-3); border-radius:12px; padding:20px 24px;
+    margin-bottom:28px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  }
+  .pay-summary-plan { font-size:13px; color:var(--muted); }
+  .pay-summary-amt  { font-family:'Space Mono',monospace; font-size:22px; font-weight:700; color:var(--gold); }
+  .pay-methods { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px; }
+  .pay-method-btn {
+    flex:1; min-width:120px; padding:12px; border-radius:10px; border:1.5px solid rgba(255,255,255,0.1);
+    background:var(--dark-3); color:var(--white); font-size:14px; font-weight:600; cursor:pointer;
+    transition:border-color .2s, background .2s; display:flex; align-items:center; justify-content:center; gap:8px;
+  }
+  .pay-method-btn.active, .pay-method-btn:hover { border-color:var(--gold); background:rgba(201,150,58,0.1); }
+  .pay-now-btn {
+    width:100%; padding:17px; border-radius:10px; border:none; cursor:pointer;
+    font-size:16px; font-weight:700; letter-spacing:0.5px;
+    background:linear-gradient(135deg,var(--gold),var(--gold-light));
+    color:var(--dark); box-shadow:0 8px 32px rgba(201,150,58,0.35);
+    transition:transform .2s, box-shadow .2s;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+  }
+  .pay-now-btn:hover { transform:translateY(-2px); box-shadow:0 14px 48px rgba(201,150,58,0.45); }
+  .secure-note { text-align:center; font-size:12px; color:var(--muted); margin-top:14px; }
 </style>
 </head>
 <body>
@@ -220,10 +385,13 @@
 <nav>
   <div class="nav-logo" onclick="showPage('home')">Grant<span>Pro</span></div>
   <div class="hamburger" onclick="toggleMenu()" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </div>
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" aria-label="Toggle light/dark">
+    <span class="tgl-lbl" id="tgl-lbl">Dark</span>
+    <div class="tgl-track"><div class="tgl-thumb" id="tgl-thumb">🌙</div></div>
+  </button>
   <div class="nav-links" id="nav-links">
     <a onclick="showPage('home');closeMenu()" id="nav-home" class="active">Home</a>
     <a onclick="showPage('grants');closeMenu()" id="nav-grants">Grants</a>
@@ -387,7 +555,7 @@
       </div>
       <div class="footer-col">
         <h5>Company</h5>
-        <a>About Us</a><a>Our Team</a><a onclick="showPage('blog')" style="cursor:pointer;">Blog &amp; Resources</a><a>Careers</a>
+        <a>About Us</a><a>Our Team</a><a>Blog &amp; Resources</a><a>Careers</a>
       </div>
       <div class="footer-col">
         <h5>Contact</h5>
@@ -450,6 +618,124 @@
   <div style="padding:0 60px 80px;max-width:1200px;margin:0 auto;">
     <div class="cta-banner"><h2>Start Your Grant Application Today</h2><p>Our team reviews your eligibility for free. No upfront payment until we find you a matching grant.</p><button class="btn-primary" onclick="showPage('grants-form')">&#128640; Apply Now &#8212; It's Free to Start</button></div>
   </div>
+
+  <!-- PAY NOW SECTION -->
+  <div style="max-width:1200px;margin:0 auto;padding:0 60px 80px;">
+    <div style="text-align:center;margin-bottom:16px;">
+      <div class="section-tag">Subscription Plans</div>
+      <h2 class="section-title">Choose Your <em style="font-style:normal;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Grant Update Plan</em></h2>
+      <p style="color:var(--muted);font-size:16px;max-width:560px;margin:12px auto 0;line-height:1.7;">Stay ahead of every grant opportunity in Nigeria. Pick the plan that matches your ambition.</p>
+    </div>
+    <div class="plan-grid">
+      <!-- Regular -->
+      <div class="plan-card" id="plan-regular" onclick="selectPlan('regular')">
+        <div class="plan-badge regular">Regular</div>
+        <div class="plan-price"><span class="currency">₦</span>50K</div>
+        <div class="plan-period">per year</div>
+        <div class="plan-name">Regular Updates</div>
+        <div class="plan-desc">Essential grant alerts and monthly newsletters for growing businesses.</div>
+        <ul class="plan-features">
+          <li><span class="fi">✅</span> Monthly grant newsletter</li>
+          <li><span class="fi">✅</span> Email grant alerts</li>
+          <li><span class="fi">✅</span> Basic eligibility checker</li>
+          <li><span class="fi">✅</span> Community forum access</li>
+          <li><span class="fi">❌</span> Priority support</li>
+          <li><span class="fi">❌</span> 1-on-1 consultation</li>
+        </ul>
+        <button class="plan-select-btn btn-regular" onclick="selectPlan('regular')">💳 Pay Now — ₦50,000</button>
+      </div>
+      <!-- VIP -->
+      <div class="plan-card vip-card" id="plan-vip" onclick="selectPlan('vip')">
+        <div class="plan-badge vip">VIP</div>
+        <div class="plan-price" style="color:var(--blue);"><span class="currency">₦</span>150K</div>
+        <div class="plan-period">per year</div>
+        <div class="plan-name">VIP Access</div>
+        <div class="plan-desc">Real-time alerts, expert sessions, and priority handling for serious applicants.</div>
+        <ul class="plan-features">
+          <li><span class="fi">✅</span> Weekly grant alerts (real-time)</li>
+          <li><span class="fi">✅</span> Priority email support</li>
+          <li><span class="fi">✅</span> Monthly expert Q&amp;A sessions</li>
+          <li><span class="fi">✅</span> Pre-written grant templates</li>
+          <li><span class="fi">✅</span> Eligibility pre-screening</li>
+          <li><span class="fi">❌</span> Dedicated account manager</li>
+        </ul>
+        <button class="plan-select-btn btn-vip" onclick="selectPlan('vip')">💳 Pay Now — ₦150,000</button>
+      </div>
+      <!-- VVIP -->
+      <div class="plan-card vvip-card" id="plan-vvip" onclick="selectPlan('vvip')">
+        <div class="plan-popular">Most Exclusive</div>
+        <div class="plan-badge vvip">VVIP</div>
+        <div class="plan-price" style="color:#A855F7;"><span class="currency">₦</span>300K</div>
+        <div class="plan-period">per year</div>
+        <div class="plan-name">VVIP Elite</div>
+        <div class="plan-desc">Full-service white-glove experience with dedicated expert and guaranteed follow-through.</div>
+        <ul class="plan-features">
+          <li><span class="fi">✅</span> Daily grant intelligence reports</li>
+          <li><span class="fi">✅</span> Dedicated account manager</li>
+          <li><span class="fi">✅</span> 1-on-1 monthly consultation</li>
+          <li><span class="fi">✅</span> Full application preparation</li>
+          <li><span class="fi">✅</span> Interview coaching & prep</li>
+          <li><span class="fi">✅</span> Priority disbursement support</li>
+        </ul>
+        <button class="plan-select-btn btn-vvip" onclick="selectPlan('vvip')">💳 Pay Now — ₦300,000</button>
+      </div>
+    </div>
+    <!-- Payment Form (shows after plan selected) -->
+    <div class="pay-form-box" id="pay-form-box">
+      <div class="pay-summary">
+        <div>
+          <div class="pay-summary-plan" id="pay-plan-label">Selected Plan</div>
+          <div style="font-weight:700;font-size:17px;" id="pay-plan-name">—</div>
+        </div>
+        <div class="pay-summary-amt" id="pay-plan-amt">₦0</div>
+      </div>
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" id="pay-name" placeholder="e.g. Adaeze Okafor">
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="pay-email" placeholder="e.g. adaeze@mybusiness.ng">
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="pay-phone" placeholder="e.g. 08012345678">
+      </div>
+      <div class="form-group">
+        <label>Payment Method</label>
+        <div class="pay-methods">
+          <button class="pay-method-btn active" id="pm-transfer" onclick="setPayMethod('transfer')">🏦 Bank Transfer</button>
+          <button class="pay-method-btn" id="pm-card" onclick="setPayMethod('card')">💳 Card</button>
+          <button class="pay-method-btn" id="pm-ussd" onclick="setPayMethod('ussd')">📲 USSD</button>
+        </div>
+      </div>
+      <div id="pm-transfer-info" style="background:var(--dark-3);border-radius:10px;padding:16px 20px;margin-bottom:20px;font-size:14px;line-height:1.8;">
+        <div style="font-weight:700;margin-bottom:8px;color:var(--gold);">🏦 Bank Transfer Details</div>
+        <div>Bank: <strong>First Bank Nigeria</strong></div>
+        <div>Account No: <strong>3012345678</strong></div>
+        <div>Account Name: <strong>GrantPro Nigeria Ltd</strong></div>
+        <div style="margin-top:8px;font-size:12px;color:var(--muted);">Use your email as payment reference. Send proof to hello@grantpro.ng</div>
+      </div>
+      <div id="pm-card-info" style="display:none;margin-bottom:20px;">
+        <div class="form-group"><label>Card Number</label><input type="text" placeholder="1234 5678 9012 3456" maxlength="19" id="card-num" oninput="fmtCard(this)"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="form-group"><label>Expiry</label><input type="text" placeholder="MM/YY" maxlength="5" oninput="fmtExpiry(this)"></div>
+          <div class="form-group"><label>CVV</label><input type="text" placeholder="123" maxlength="3"></div>
+        </div>
+      </div>
+      <div id="pm-ussd-info" style="display:none;background:var(--dark-3);border-radius:10px;padding:16px 20px;margin-bottom:20px;font-size:14px;">
+        <div style="font-weight:700;margin-bottom:8px;color:var(--gold);">📲 USSD Payment</div>
+        <div>Dial <strong>*894*1*3012345678#</strong> on your phone</div>
+        <div>Enter amount: <strong id="ussd-amt">₦50,000</strong></div>
+        <div style="margin-top:8px;font-size:12px;color:var(--muted);">Works on all Nigerian networks — no internet needed.</div>
+      </div>
+      <button class="pay-now-btn" onclick="processPayment()">
+        🔐 <span id="pay-btn-label">Pay Now</span>
+      </button>
+      <div class="secure-note">🔒 Secured by 256-bit SSL encryption &nbsp;·&nbsp; Instant confirmation</div>
+    </div>
+  </div>
+
   <footer style="background:var(--dark-2);border-top:1px solid rgba(255,255,255,0.07);padding:28px 60px;text-align:center;"><div style="font-size:13px;color:var(--muted);">&#169; 2025 GrantPro Nigeria Ltd. &middot; <span onclick="showPage('home')" style="cursor:pointer;color:var(--gold);">Back to Home</span></div></footer>
 </div>
 
@@ -1515,6 +1801,78 @@
     '\u2705', 'Submission Received!',
     'Thank you, <strong>' + val('f-name') + '</strong>!<br>Our team will contact <strong style="color:var(--gold);">' + val('f-phone') + '</strong> within 2 hours.',
     'var(--gold)');
+  }
+
+  /* ── THEME TOGGLE ── */
+  var isLight = localStorage.getItem('gp-theme') === 'light';
+  function applyTheme(light) {
+    isLight = light;
+    document.body.classList.toggle('light', light);
+    document.getElementById('tgl-thumb').textContent = light ? '☀️' : '🌙';
+    var lbl = document.getElementById('tgl-lbl');
+    if (lbl) lbl.textContent = light ? 'Light' : 'Dark';
+    localStorage.setItem('gp-theme', light ? 'light' : 'dark');
+  }
+  applyTheme(isLight);
+  document.getElementById('theme-toggle').addEventListener('click', function(){ applyTheme(!isLight); });
+
+  /* ── PAYMENT PLANS ── */
+  var selectedPlan = null;
+  var planData = {
+    regular: { name:'Regular Updates', label:'Regular Plan', amt:'₦50,000',  raw:50000  },
+    vip:     { name:'VIP Access',      label:'VIP Plan',     amt:'₦150,000', raw:150000 },
+    vvip:    { name:'VVIP Elite',      label:'VVIP Plan',    amt:'₦300,000', raw:300000 }
+  };
+  function selectPlan(key) {
+    selectedPlan = key;
+    ['regular','vip','vvip'].forEach(function(k){
+      document.getElementById('plan-'+k).classList.toggle('selected', k===key);
+    });
+    var p = planData[key];
+    document.getElementById('pay-plan-label').textContent = p.label;
+    document.getElementById('pay-plan-name').textContent  = p.name;
+    document.getElementById('pay-plan-amt').textContent   = p.amt;
+    document.getElementById('pay-btn-label').textContent  = 'Pay Now — ' + p.amt;
+    document.getElementById('ussd-amt').textContent       = p.amt;
+    var box = document.getElementById('pay-form-box');
+    box.classList.add('visible');
+    setTimeout(function(){ box.scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+  }
+  var payMethod = 'transfer';
+  function setPayMethod(m) {
+    payMethod = m;
+    ['transfer','card','ussd'].forEach(function(k){
+      document.getElementById('pm-'+k).classList.toggle('active', k===m);
+      var info = document.getElementById('pm-'+k+'-info');
+      if (info) info.style.display = k===m ? 'block' : 'none';
+    });
+  }
+  function fmtCard(el){ el.value=el.value.replace(/\D/g,'').replace(/(.{4})/g,'$1 ').trim(); }
+  function fmtExpiry(el){
+    var v=el.value.replace(/\D/g,'');
+    if(v.length>=2) v=v.slice(0,2)+'/'+v.slice(2);
+    el.value=v;
+  }
+  function processPayment() {
+    if (!selectedPlan) { alert('Please select a plan first.'); return; }
+    var name  = document.getElementById('pay-name').value.trim();
+    var email = document.getElementById('pay-email').value.trim();
+    var phone = document.getElementById('pay-phone').value.trim();
+    if (!name)  { alert('Please enter your full name.');   return; }
+    if (!email || email.indexOf('@')<0) { alert('Please enter a valid email.'); return; }
+    if (!phone) { alert('Please enter your phone number.'); return; }
+    var p = planData[selectedPlan];
+    var ref = 'GP-' + Date.now().toString(36).toUpperCase();
+    document.getElementById('s-icon').textContent  = '💳';
+    document.getElementById('s-title').textContent = 'Payment Initiated!';
+    document.getElementById('s-msg').innerHTML =
+      'Thank you, <strong>' + name + '</strong>!<br>' +
+      'Your <strong style="color:var(--gold);">' + p.name + '</strong> subscription for <strong>' + p.amt + '</strong> has been received.<br><br>' +
+      (payMethod==='transfer'
+        ? 'Please complete your bank transfer using reference <strong style="color:var(--gold);">' + ref + '</strong> and send proof to <strong>hello@grantpro.ng</strong>.'
+        : 'Your payment is being processed. You will receive a confirmation at <strong style="color:var(--gold);">' + email + '</strong> shortly.');
+    document.getElementById('s-ref').textContent = 'REF: ' + ref;
+    document.getElementById('success-overlay').classList.add('show');
   }
 
     /* ── STATS COUNTER ── */
